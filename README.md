@@ -21,3 +21,8 @@ The ```Boundaries``` directory contains the boundary data for this project and a
   - U.S. Census block-group level income, race, employment, education, renter v owner, SFR/multifamily
   - Prevalence of commercial and industrial facilities (e.g. ReferenceUSA)
   - Water rate data (UNC Environmental Finance Center NC rate dashboard)
+
+
+## Data Sources
+
+1. Boundary data [Boundaries]
