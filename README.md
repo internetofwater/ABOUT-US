@@ -1,7 +1,7 @@
 # ABOUT-US
 Repo for managing ABOUT-US and related projects
 
-The ```Boundaries``` directory contains the boundary data for this project and associated documentation. 
+The ```Boundaries``` [directory](Boundaries) contains the boundary data for this project and associated documentation. 
 
 
 ## Asks from NC-DENR
@@ -25,4 +25,4 @@ The ```Boundaries``` directory contains the boundary data for this project and a
 
 ## Data Sources
 
-1. Boundary data [Boundaries]
+1. Boundary data [Boundaries](Boundaries)
