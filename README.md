@@ -24,5 +24,14 @@ The ```Boundaries``` [directory](Boundaries) contains the boundary data for this
 
 
 ## Data Sources
+(will provide links to descriptions, API documentation, any client libraries)
 
 1. Boundary data [Boundaries](Boundaries)
+2. USGS Streamgages
+3. USGS Monitoring Wells
+4. State Stream Gages
+5. US Army Corps of Engineers Reservoir operations data
+6. NOAA weather stations
+7. PRISM
+8. Daymet
+9. 
