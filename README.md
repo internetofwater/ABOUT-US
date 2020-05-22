@@ -22,7 +22,7 @@ The ```Boundaries``` [directory](Boundaries) contains the boundary data for this
 (will provide links to descriptions, API documentation, any client libraries)
 
 1. Service Area [Boundaries](Boundaries) of 532 water utilities in North Carolina.
-2. [USGS National Hydrography Dataset]https://www.usgs.gov/core-science-systems/ngp/national-hydrography/national-hydrography-dataset?qt-science_support_page_related_con=0#qt-science_support_page_related_con), vector geospatial data charcterizing watersheds, waterbodies, and streams.
+2. [USGS National Hydrography Dataset](https://www.usgs.gov/core-science-systems/ngp/national-hydrography/national-hydrography-dataset?qt-science_support_page_related_con=0#qt-science_support_page_related_con), vector geospatial data charcterizing watersheds, waterbodies, and streams.
 3. USGS Streamgages. Read about streamgages [here](https://www.usgs.gov/mission-areas/water-resources/science/streamgaging-basics?qt-science_center_objects=0#qt-science_center_objects). Familiarize yourself with the USGS streamgage data web services [here](https://waterservices.usgs.gov/).
      - [R client package dataRetrieval](https://usgs-r.github.io/dataRetrieval/)
      - [Python client package HydroData](https://hydrodata.readthedocs.io/en/latest/)
