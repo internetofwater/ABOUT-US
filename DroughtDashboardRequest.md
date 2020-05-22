@@ -4,6 +4,8 @@
 
 May 5, 2020
 
+Organized into user stories below
+
 # What is the water supply status for my utility?
 
 ## Question 1: Who provides my water?
