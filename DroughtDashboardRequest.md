@@ -1,4 +1,3 @@
-![](/img/Duke.png) ![](/img/iow.jpg)
 
 # Triangle Drought/Water Supply Dashboard
 
