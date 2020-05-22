@@ -1,3 +1,6 @@
+![](/img/duke.png) ![](/img/iow.jpg)
+
+
 # ABOUT-US
 Repo for managing ABOUT-US and related projects
 
