@@ -1,4 +1,4 @@
-![](RackMultipart20200522-4-1cv0mcx_html_cac2e8208ac978d2.png) ![](RackMultipart20200522-4-1cv0mcx_html_497be7d2f66bd0bd.jpg)
+![](/img/Duke.png) ![](/img/iow.jpg)
 
 # Triangle Drought/Water Supply Dashboard
 
