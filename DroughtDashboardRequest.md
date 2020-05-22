@@ -93,8 +93,7 @@ There was a lot of conversation around what metrics are appropriate since utilit
 **What this can look like on dashboard:**
 
 - Several liked the idea of a map showing current conditions compared to historic. Something similar to the USGS.
-
-![](RackMultipart20200522-4-1cv0mcx_html_471838810d93b85a.png)
+[[/img/usgsmap.png]]
 
 - Then if a user clicks on a point you can see more details – a time series that shows trend and compares with historic record or within a time period selected by the user. There are two plots that come immediately to mind as shown below. Depending on years of data available from utilities, the top graph may be better so folks can see how much data is being considered.
 - Showing the current year in bold with previous years of data in light gray lines. Certain historic lines could be colored (such as the 2007-2008 or 2000-2002 droughts).
