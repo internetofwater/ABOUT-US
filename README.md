@@ -12,7 +12,7 @@ The ```Boundaries``` [directory](Boundaries) contains the boundary data for this
  
   - U.S. Census block-group level income, race, employment, education, renter v owner, SFR/multifamily
   - Prevalence of commercial and industrial facilities (e.g. ReferenceUSA)
-  - Water rate data (UNC Environmental Finance Center NC rate dashboard)
+  - Water rate data [UNC Environmental Finance Center NC rate tables](https://efc.sog.unc.edu/resource/north-carolina-rates-resources#tables)
   
   ## Asks from Triangle Water Supply Partnership (Water Utilities of Chapal Hill/Carrboro, Durham, Raleigh, Cary, Fayetteville)
 
