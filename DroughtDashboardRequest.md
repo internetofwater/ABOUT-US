@@ -93,16 +93,16 @@ There was a lot of conversation around what metrics are appropriate since utilit
 **What this can look like on dashboard:**
 
 - Several liked the idea of a map showing current conditions compared to historic. Something similar to the USGS.
-[[/img/usgsmap.png]]
+![](/img/usgsmap.png)
 
 - Then if a user clicks on a point you can see more details – a time series that shows trend and compares with historic record or within a time period selected by the user. There are two plots that come immediately to mind as shown below. Depending on years of data available from utilities, the top graph may be better so folks can see how much data is being considered.
 - Showing the current year in bold with previous years of data in light gray lines. Certain historic lines could be colored (such as the 2007-2008 or 2000-2002 droughts).
 
-![](RackMultipart20200522-4-1cv0mcx_html_21557dc83756bb60.jpg)
+![](/img/orville dam map.jpg)
 
 - Showing current year in bold with previous years summarized in a boxplot (blue line is median – could get rid of this and just show current year instead), dark shaded area is 25-75%, light shaded area is 10-90% and dashed lines are min and max for Falls Lake (1984-2014). This shows how full the reservoir is according to its guide curve (at 100% the multi-purpose pool is full, above 100% the flood control pool is filling, and below 100% is summer/drought). I just drew a thick red line to show what that you could draw the current year on the plot and see what happens.
 
-![](RackMultipart20200522-4-1cv0mcx_html_36517c9d459a4e38.gif)
+![](img/image.png)
 
 - We can do something similar with demand and/or create a kind of game.
 
@@ -120,7 +120,7 @@ It was unclear if folks wanted to see drought metrics on the dashboard. However,
 
 Esri has a pretty nice drought tracker that shows current drought status and lets you click on a county to see a time series of drought. [https://livingatlas.arcgis.com/drought/](https://livingatlas.arcgis.com/drought/)
 
-![](RackMultipart20200522-4-1cv0mcx_html_3b478ca817863f85.png)
+![](img/droughtmap.png)
 
 ## Question 5: Where does the water in my utility come from?
 
