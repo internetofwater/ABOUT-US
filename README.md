@@ -25,12 +25,14 @@ The ```Boundaries``` [directory](Boundaries) contains the boundary data for this
 2. [USGS National Hydrography Dataset](https://www.usgs.gov/core-science-systems/ngp/national-hydrography/national-hydrography-dataset?qt-science_support_page_related_con=0#qt-science_support_page_related_con), vector geospatial data charcterizing watersheds, waterbodies, and streams.
 3. USGS Streamgages. Read about streamgages [here](https://www.usgs.gov/mission-areas/water-resources/science/streamgaging-basics?qt-science_center_objects=0#qt-science_center_objects). Familiarize yourself with the USGS streamgage data web services [here](https://waterservices.usgs.gov/).
      - [R client package dataRetrieval](https://usgs-r.github.io/dataRetrieval/)
-     - [Python client package HydroData](https://hydrodata.readthedocs.io/en/latest/)
+     - [Python client library HydroData](https://hydrodata.readthedocs.io/en/latest/)
 4. USGS Monitoring Wells. Read about groundwater monitoring [here](https://water.usgs.gov/ogw/networks.html). Read about groundwater data web services [here](https://water.usgs.gov/ogw/networks.html)
 5. State Stream Gages
-6. US Army Corps of Engineers Reservoir operations data
-7. NOAA weather stations
-8. PRISM
+6. US Army Corps of Engineers [Corps Water Management System](https://www.hec.usace.army.mil/cwms/) and [data services](https://water.usace.army.mil/dist/docs/#api-_). Mostly relevant for [Jordan Lake](https://deq.nc.gov/about/divisions/water-resources/planning/basin-planning/map-page/cape-fear-river-basin-landing/jordan-lake-water-supply-allocation/jordan-lake-water-supply-allocation-background-info). THe Corps runs it and many Triangle Water Utilties source a lot of their water based on legal-operational "allocations" from Jordan Lake. 
+7. NOAA weather stations. [Data](https://www.ncdc.noaa.gov/cdo-web/) and [web services](https://www.ncdc.noaa.gov/cdo-web/webservices/v2).
+      - [R client package](https://ropensci.org/tutorials/rnoaa_tutorial/)
+      - [Python client library](https://github.com/paulokuong/noaa)
+8. [PRISM](http://www.prism.oregonstate.edu/) (for gridded temperature and precipitation data)
 9. Daymet
 
 
