@@ -16,7 +16,7 @@ The ```Boundaries``` [directory](Boundaries) contains the boundary data for this
   
   ## Asks from Triangle Water Supply Partnership (Water Utilities of Chapal Hill/Carrboro, Durham, Raleigh, Cary, Fayetteville)
 
-1. A visualization tool to visualize climate data relevant to utilities, where utilities can visualize the status of water supply of their immediate environment and that of thier neighbors. This ask is descibed in more detail at DroughtDashboard
+1. A visualization tool to visualize climate data relevant to utilities, where utilities can visualize the status of water supply of their immediate environment and that of thier neighbors. This ask is descibed in more detail in [DroughtDashboardRequest.md](DroughtDashboardRequest.md)
 
 ## Data Sources
 (will provide links to descriptions, API documentation, any client libraries)
