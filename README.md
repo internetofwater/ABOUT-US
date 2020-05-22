@@ -38,6 +38,7 @@ The ```Boundaries``` [directory](Boundaries) contains the boundary data for this
 8. [PRISM](http://www.prism.oregonstate.edu/) (for gridded temperature and precipitation data)
 9. Daymet
 10. US Drought Monitor. [Explanation](https://droughtmonitor.unl.edu/About/WhatistheUSDM.aspx) and [Web Services](https://droughtmonitor.unl.edu/WebServiceInfo.aspx)
+11. NC State Climate Office [data service](https://climate.ncsu.edu/cronos)
 
 
 
