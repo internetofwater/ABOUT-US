@@ -1,6 +1,3 @@
-![](/img/duke.png?s=10) ![](/img/iow.jpg?s=10)
-
-
 # ABOUT-US
 Repo for managing ABOUT-US and related projects
 
@@ -32,4 +29,7 @@ The ```Boundaries``` [directory](Boundaries) contains the boundary data for this
 6. NOAA weather stations
 7. PRISM
 8. Daymet
-9. 
+
+
+
+![](/img/duke.png?s=10) ![](/img/iow.jpg?s=10)
