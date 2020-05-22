@@ -1,4 +1,4 @@
-![](/img/duke.png) ![](/img/iow.jpg)
+![](/img/duke.png?s=10) ![](/img/iow.jpg?s=10)
 
 
 # ABOUT-US
