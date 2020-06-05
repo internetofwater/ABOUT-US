@@ -18,10 +18,7 @@ def home_page():
 def utiltyfinder():
     return render_template('utilityfinder.html')
 
-def geocode(address, zip_code, state):
-    latitude = 1
-    longitude = 1
-    return latitude, longitude
+
 
 @app.route('/search', methods=["GET", "POST"])
 def search():
@@ -30,5 +27,21 @@ def search():
             zipcode = request.form["zipcode"]
             state = request.form["state"]
             latitude, longitude = geocode(address, zipcode, state)
-            
+
+
             return render_template("search.html", lat=latitude, lon=longitude)
+
+
+locator = Nominatim(user_agent="otherGeocoder")
+
+def geocode (address, zipcode, state):
+    try: 
+        location = locator.geocode(address, zipcode, state)
+        if location is None:
+            return 0, 0
+        else:     
+            return location.latitude, location.longitude
+    except:
+        return "Address Unclear", "Consider Rewriting"
+
+                   
