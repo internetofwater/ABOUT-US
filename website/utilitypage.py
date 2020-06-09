@@ -59,6 +59,7 @@ def geocode (addressfull):
 
 
 StateWide = gpd.read_file(r"../Boundaries/NC_statewide_CWS_areas.gpkg")
+StateWide.geometry = StateWide.geometry.to_crs(epsg="4326")
 polygons = StateWide['geometry']
 utility = StateWide['SystemName']
 
