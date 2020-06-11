@@ -6,6 +6,8 @@
 		<a>Interactive Map</a>
 	</nav>
 	<head>
+		<script src='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js'></script>
+		<link href='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css' rel='stylesheet' />
 		<title>Data+ Utility Finder Homepage</title>
 	</head>
 	<body>
@@ -15,5 +17,15 @@
 	<p>Latitude is: {{lat}}, Longitude is {{lon}} </p>
 	<br><br>
 	<p>Utility is: {{ut}} </p>
+	<div id='map' style='width: 800px; height: 500px;'></div>
+		<script>
+			mapboxgl.accessToken = 'pk.eyJ1IjoiYnR3MTkiLCJhIjoiY2tiOGR6MzI1MDNjaTJ0c3hnZHBmODRneSJ9.QVj1xKQ--FUvtw6soygk9g';
+			var map = new mapboxgl.Map({
+			container: 'map',
+			style: 'mapbox://styles/btw19/ckb9tgy821c6j1itda2ynmftu', // stylesheet location
+			center: [{{lon}}, {{lat}}], // starting position [lng, lat]
+			zoom: 7.5 // starting zoom
+			});
+		</script>
 	</body>
 	</html>
