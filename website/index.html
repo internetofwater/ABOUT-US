@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+    <meta charset="utf-8" />
+
+    <title>Create interactive hover effects with Mapbox GL JS</title>
+
+    <meta
+
+      name="viewport"
+
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+
+    />
+
+    <meta name="robots" content="noindex, nofollow" />
+
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js"></script>
+
+    <link
+
+      href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css"
+
+      rel="stylesheet"
+
+    />
+
+    <style>
+
+      body {
+
+        margin: 0;
+
+        padding: 0;
+
+      }
+
+      #map {
+
+        position: absolute;
+
+        top: 0;
+
+        bottom: 0;
+
+        width: 100%;
+
+      }
+
+      .quakeInfo {
+
+        position: absolute;
+
+        font-family: sans-serif;
+
+        margin-top: 5px;
+
+        margin-left: 5px;
+
+        padding: 5px;
+
+        width: 30%;
+
+        border: 2px solid black;
+
+        font-size: 14px;
+
+        color: #222;
+
+        background-color: #fff;
+
+        border-radius: 3px;
+
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+
+    <div id="map"></div>
+
+    <div class="quakeInfo">
+
+      <div><strong>PWSID:</strong>&nbsp;<span id="mag"></span></div>
+
+      <div><strong>Name:</strong>&nbsp;<span id="loc"></span></div>
+
+    </div>
+
+    <script>
+
+      mapboxgl.accessToken = 'pk.eyJ1IjoiYnR3MTkiLCJhIjoiY2tiOGR6MzI1MDNjaTJ0c3hnZHBmODRneSJ9.QVj1xKQ--FUvtw6soygk9g';
+
+      var map = new mapboxgl.Map({
+
+        container: 'map', // Specify the container ID
+
+        style: 'mapbox://styles/mapbox/streets-v11', // Specify which map style to use
+
+        center: [-122.44121, 37.76132], // Specify the starting position [lng, lat]
+
+        zoom: 3.5 // Specify the starting zoom
+
+      });
+
+      
+
+      // Target the span elements used in the sidebar
+
+
+
+      var magDisplay = document.getElementById('mag');
+
+
+
+      var locDisplay = document.getElementById('loc');
+
+
+      map.on('load', function() {
+
+
+        map.addSource('utilities-simplest', {
+
+
+
+          'type': 'vector',
+
+
+
+          'url': 'mapbox://btw19.2fhcidlx'
+
+
+
+        });
+
+
+        map.addLayer({
+
+          'id': 'utilities-simplest-viz',
+
+            'source-layer': 'EvenSimplerPolygonsNC-9cvs7f',
+
+            'type': 'fill',
+
+            'source': 'utilities-simplest',
+
+            'maxzoom': 6.99,
+
+            'paint': {
+
+             'fill-color': '#4EE91E'
+
+          }
+
+
+      })
+
+
+                map.addSource('utilities-simpler', {
+
+          'type': 'vector',
+
+          'url': 'mapbox://btw19.0j0f3yp6'
+
+        });
+
+        map.addLayer({
+
+          'id': 'utilities-simpler-viz',
+
+            'source-layer': 'SimplePolygonsNC-bz1aui',
+
+            'type': 'fill',
+
+            'source': 'utilities-simpler',
+
+            'minzoom': 7,
+            'maxzoom': 10,
+                        'paint': {
+             'fill-color': '#1E1EE9'
+          }
+
+      })
+
+        map.addSource('utilities', {
+
+          'type': 'vector',
+
+          'url': 'mapbox://btw19.9b4ihil6'
+
+        });
+
+        map.addLayer({
+
+          'id': 'utilities-viz',
+
+            'source-layer': 'utilities-9lcba8',
+
+            'type': 'fill',
+
+            'source': 'utilities',
+
+            'minzoom': 10,
+
+            'paint': {
+
+             'fill-color': '#E9351E'
+
+          }
+
+      })
+
+
+
+
+        var quakeID = null;
+
+
+
+        map.on('mousemove', 'utilities-viz', e => {
+
+          map.getCanvas().style.cursor = 'default';
+
+
+          // Set variables equal to the current feature's magnitude, location, and time
+
+
+          var quakeMagnitude = e.features[0].properties.PWSID; // changed 
+
+          var quakeLocation = e.features[0].properties.SystemName;
+
+
+
+          if (e.features.length > 0) {
+
+
+            // Display the magnitude, location, and time in the sidebar
+
+
+
+            magDisplay.textContent = quakeMagnitude;
+
+            locDisplay.textContent = quakeLocation;
+
+            // When the mouse moves over the earthquakes-viz layer, update the
+
+            // feature state for the feature under the mouse
+
+            if (quakeID) {
+
+              map.removeFeatureState({
+
+                source: 'utilities',
+
+                id: quakeID
+              });
+
+            }
+
+
+
+            quakeID = e.features[0].id;
+
+            map.setFeatureState(
+
+              {
+
+                source: 'utilities',
+
+               id: quakeID
+              },
+         
+              {
+
+                hover: true
+
+              }
+
+            );
+
+
+          }
+
+
+        });
+
+
+
+
+
+        map.on('mousemove', 'utilities-simpler-viz', e => {
+
+          map.getCanvas().style.cursor = 'default';
+
+
+          // Set variables equal to the current feature's magnitude, location, and time
+
+
+          var quakeMagnitude = e.features[0].properties.PWSID; // changed 
+
+          var quakeLocation = e.features[0].properties.SystemName;
+
+
+
+          if (e.features.length > 0) {
+
+
+            // Display the magnitude, location, and time in the sidebar
+
+
+
+            magDisplay.textContent = quakeMagnitude;
+
+            locDisplay.textContent = quakeLocation;
+
+            // When the mouse moves over the earthquakes-viz layer, update the
+
+            // feature state for the feature under the mouse
+
+            if (quakeID) {
+
+              map.removeFeatureState({
+
+                source: 'utilities-simpler',
+
+                id: quakeID
+              });
+
+            }
+
+
+
+            quakeID = e.features[0].id;
+
+            map.setFeatureState(
+
+              {
+
+                source: 'utilities-simpler',
+
+               id: quakeID
+              },
+         
+              {
+
+                hover: true
+
+              }
+
+            );
+
+
+          }
+
+
+        });
+
+        map.on('mousemove', 'utilities-simplest-viz', e => {
+
+          map.getCanvas().style.cursor = 'default';
+
+
+          // Set variables equal to the current feature's magnitude, location, and time
+
+
+          var quakeMagnitude = e.features[0].properties.PWSID; // changed 
+
+          var quakeLocation = e.features[0].properties.SystemName;
+
+
+
+          if (e.features.length > 0) {
+
+
+            // Display the magnitude, location, and time in the sidebar
+
+
+
+            magDisplay.textContent = quakeMagnitude;
+
+            locDisplay.textContent = quakeLocation;
+
+            // When the mouse moves over the earthquakes-viz layer, update the
+
+            // feature state for the feature under the mouse
+
+            if (quakeID) {
+
+              map.removeFeatureState({
+
+                source: 'utilities-simplest',
+
+                id: quakeID
+              });
+
+            }
+
+
+
+            quakeID = e.features[0].id;
+
+            map.setFeatureState(
+
+              {
+
+                source: 'utilities-simplest',
+
+               id: quakeID
+              },
+         
+              {
+
+                hover: true
+
+              }
+
+            );
+
+
+          }
+
+
+        });
+
+        // When the mouse leaves the earthquakes-viz layer, update the
+
+        // feature state of the previously hovered feature
+
+        map.on('mouseleave', 'utilitier-viz', function() {
+
+          if (quakeID) {
+
+            map.setFeatureState(
+
+              {
+
+                source: 'utilitier',
+
+                id: quakeID
+
+              },
+
+              {
+
+                hover: false
+
+              }
+
+            );
+
+          }
+
+
+          quakeID = null;
+
+          // Remove the information from the previously hovered feature from the sidebar
+
+          magDisplay.textContent = '';
+
+          locDisplay.textContent = '';
+
+          // Reset the cursor style
+
+          map.getCanvas().style.cursor = '';
+
+
+        });
+
+
+
+
+
+        map.on('mouseleave', 'utilitier-simpler-viz', function() {
+
+          if (quakeID) {
+
+            map.setFeatureState(
+
+              {
+
+                source: 'utilitier-simpler',
+
+                id: quakeID
+
+              },
+
+              {
+
+                hover: false
+
+              }
+
+            );
+
+          }
+
+
+          quakeID = null;
+
+          // Remove the information from the previously hovered feature from the sidebar
+
+          magDisplay.textContent = '';
+
+          locDisplay.textContent = '';
+
+          // Reset the cursor style
+
+          map.getCanvas().style.cursor = '';
+
+
+        });
+
+
+        map.on('mouseleave', 'utilitier-simplest-viz', function() {
+
+          if (quakeID) {
+
+            map.setFeatureState(
+
+              {
+
+                source: 'utilitier-simplest',
+
+                id: quakeID
+
+              },
+
+              {
+
+                hover: false
+
+              }
+
+            );
+
+          }
+
+
+          quakeID = null;
+
+          // Remove the information from the previously hovered feature from the sidebar
+
+          magDisplay.textContent = '';
+
+          locDisplay.textContent = '';
+
+          // Reset the cursor style
+
+          map.getCanvas().style.cursor = '';
+
+
+        });        
+
+      });
+
+
+    </script>
+
+
+  </body>
+
+
+</html>
