@@ -18,14 +18,53 @@
 	<br><br>
 	<p>Utility is: {{ut}} </p>
 	<div id='map' style='width: 800px; height: 500px;'></div>
-		<script>
-			mapboxgl.accessToken = 'pk.eyJ1IjoiYnR3MTkiLCJhIjoiY2tiOGR6MzI1MDNjaTJ0c3hnZHBmODRneSJ9.QVj1xKQ--FUvtw6soygk9g';
-			var map = new mapboxgl.Map({
+	<script>
+		mapboxgl.accessToken = 'pk.eyJ1IjoiYnR3MTkiLCJhIjoiY2tiOGR6MzI1MDNjaTJ0c3hnZHBmODRneSJ9.QVj1xKQ--FUvtw6soygk9g';
+		var map = new mapboxgl.Map({
 			container: 'map',
 			style: 'mapbox://styles/btw19/ckb9tgy821c6j1itda2ynmftu', // stylesheet location
 			center: [{{lon}}, {{lat}}], // starting position [lng, lat]
 			zoom: 7.5 // starting zoom
+		});
+
+		map.on('load', function() {
+			//Add a source for the state polygons.
+			map.addSource('utilities', {
+				'type': 'vector',
+				'data': 'mapbox://btw19.2fhcidlx'
 			});
-		</script>
+	 
+			// Add a layer showing the state polygons.
+			map.addLayer({
+				'id': 'utilities-layer',
+				'type': 'fill',
+				'source': 'utilities',
+				'paint': {
+					'fill-color': 'rgba(200, 100, 240, 0.4)',
+					'fill-outline-color': 'rgba(200, 100, 240, 1)'
+				}
+			});
+	 
+			// When a click event occurs on a feature in the states layer, open a popup at the
+			// location of the click, with description HTML from its properties.
+			map.on('click', 'utilities-layer', function(e) {
+				new mapboxgl.Popup()
+					.setLngLat(e.lngLat)
+					.setHTML(e.features[0].properties.name)
+					.addTo(map);
+			});
+	 
+			// Change the cursor to a pointer when the mouse is over the states layer.
+			map.on('mouseenter', 'utilities-layer', function() {
+				map.getCanvas().style.cursor = 'pointer';
+			});
+	 
+			// Change it back to a pointer when it leaves.
+			map.on('mouseleave', 'utilities-layer', function() {
+				map.getCanvas().style.cursor = '';
+			});
+		});
+	</script>
+
 	</body>
 	</html>
