@@ -32,11 +32,12 @@ def home_page():
 def utiltyfinder():
     return render_template('utilityfinder.html')
 
+#when i put in a non-existant address, it goes to /search
+#when i go to interactive_map it says it doesnt exist
 
-
-@app.route('/search', methods=["GET", "POST"])
+@app.route('/search', methods=["GET", "POST"]) #POST requests that a web server accepts the data enclosed in the body of the request message
 def search():
-        if request.method == "POST":
+        if request.method == "POST":       #GET- retrieves information from the server
             lista = []
             address = request.form["address"]
             zipcode = request.form["zipcode"]
@@ -46,12 +47,15 @@ def search():
             lista.append(state)
             addressfull = ', '.join(lista)
             latitude, longitude = geocode(addressfull)
+            if latitude == 0 and longitude ==0:
+                return render_template("error_page.html", ad=address, zipc=zipcode, st=state)    
             utility = correct_utility_function(latitude, longitude)
             (utility3, link2) = utility
             print(utility3)
             print(link2)
-
             return render_template("search.html", lat=latitude, lon=longitude, ad=address, zipc=zipcode, st=state, uname=utility3, linkname=link2)
+        else:
+            return render_template("interactive_map.html")
 
 
 locator = Nominatim(user_agent="otherGeocoder")
@@ -64,7 +68,7 @@ def geocode (addressfull):  #geocoder address to coordinates
         else:     
             return location.latitude, location.longitude
     except:
-        return "Address Unclear", "Consider Rewriting"
+        return 0,0  
 
 
 response = requests.get('https://www.ncwater.org/Drought_Monitoring/statusReport.php/')  #conservation status info webscraping
@@ -119,7 +123,6 @@ utility2 = Combined_Utility['SystemName']
 link = Combined_Utility['External Links']
 
 def missing_utility(i):
-    
     UtilityCloser = utility2.replace('_', ' ')   #make the utility readable
     UtilityCloser = UtilityCloser.replace('\'', '')
     UtilityCloser = UtilityCloser.replace('\"', '')
