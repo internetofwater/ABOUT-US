@@ -74,35 +74,35 @@ def convertUtility(latitude, longitude):
     utilitytemp = find_utility_function(latitude, longitude)
     UtilityCloser = utilitytemp.replace('_', ' ')   #make the utility readable
     UtilityCloser = UtilityCloser.replace('\'', '')
-        UtilityCloser = UtilityCloser.replace('\"', '')
-        UtilityList = list(UtilityCloser.split(" "))
-        for k in range(len(UtilityList)):
-            UtilityList[k] = UtilityList[k].replace(' ', '')
+    UtilityCloser = UtilityCloser.replace('\"', '')
+    UtilityList = list(UtilityCloser.split(" "))
+    for k in range(len(UtilityList)):
+        UtilityList[k] = UtilityList[k].replace(' ', '')
         if 'Town' == UtilityList[0] or 'City' == UtilityList[0]:
-            return(i, UtilityCloser)
+            return(UtilityCloser)
         else:
             if 'Town of' in UtilityCloser or 'Town Of' in UtilityCloser or 'City Of' in UtilityCloser or 'City of' in UtilityCloser or 'Village of' in UtilityCloser or 'Village Of' in UtilityCloser:
                 if len(UtilityList) == 3:
                     myorder = [1, 2, 0]
                     UtilityTown = [UtilityList[i] for i in myorder]
-                    return(i, ' '.join(UtilityTown[0 : 3]))
+                    return(' '.join(UtilityTown[0 : 3]))
                 else:
                     if len(UtilityList) == 4:
                         myorder = [2, 3, 0, 1]
                         UtilityTown = [UtilityList[i] for i in myorder]
-                        return(i, ' '.join(UtilityTown[0 :5]))
+                        return(' '.join(UtilityTown[0 :5]))
                     else:
                         if '' in UtilityList[2]:
                             myorder = [3, 4, 0, 1]
                             UtilityTown = [UtilityList[i] for i in myorder]
-                            return(i, ' '.join(UtilityTown[0 :5]))
+                            return(' '.join(UtilityTown[0 :5]))
                         else:
                             myorder = [1, 2, 0, 3, 4]
                             UtilityTown = [UtilityList[i] for i in myorder]
-                            return(i, ' '.join(UtilityTown[0 :6]))
+                            return(' '.join(UtilityTown[0 :6]))
             else:
                 UtilityJoin = list(UtilityCloser.split(" "))
-                return(i, ' '.join(UtilityJoin[0 : 6]))
+                return(' '.join(UtilityJoin[0 : 6]))
     else:
         if ',' in utility.iloc[i]:
             UtilityCloser = utility.iloc[i].replace(',', '')
