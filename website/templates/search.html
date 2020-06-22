@@ -23,8 +23,8 @@
 		var map = new mapboxgl.Map({
 			container: 'map',
 			style: 'mapbox://styles/btw19/ckb9tgy821c6j1itda2ynmftu', // stylesheet location
-			center: [{{lon}}, {{lat}}], // starting position [lng, lat]
-			zoom: 7.5 // starting zoom
+			center: [-79, 35.99], // starting position [lng, lat]
+			zoom: 6 // starting zoom
 		});
 
 		map.on('load', function() {
@@ -33,7 +33,57 @@
 				'type': 'vector',
 				'data': 'mapbox://btw19.2fhcidlx'
 			});
-	 
+      
+      map.addSource('utilitiesicons', {
+'type': 'geojson',
+'data': {
+'type': 'FeatureCollection',
+'features': [
+{
+'type': 'Feature',
+'properties': {
+'description': '<a href="https://google.com">One</a>',
+'iconSize': [60, 60]
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-77.2, 35.3]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description': '<a href="https://google.com">Two</a>',
+'iconSize': [50, 50]
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-79.1, 35.99]
+}
+},
+{
+'type': 'Feature',
+'properties': {
+'description': '<a href="https://google.com">Three</a>',
+'iconSize': [40, 40]
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [-80, 34.9]
+}
+}
+]
+}
+});
+	 map.addLayer({
+            'id': 'utilitiesicons',
+            'type': 'symbol',
+            'source': 'utilitiesicons',
+            'layout': {
+                'icon-image': 'rocket-15',
+                'icon-allow-overlap': true
+            }
+        });
 			// Add a layer showing the state polygons.
 			map.addLayer({
 				'id': 'utilities-layer',
@@ -63,7 +113,33 @@
 			map.on('mouseleave', 'utilities-layer', function() {
 				map.getCanvas().style.cursor = '';
 			});
-		});
+      map.on('click', 'utilitiesicons', function(e) {
+            var coordinates = e.features[0].geometry.coordinates.slice();
+            var description = e.features[0].properties.description;
+
+            // Ensure that if the map is zoomed out such that multiple
+            // copies of the feature are visible, the popup appears
+            // over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+
+            new mapboxgl.Popup()
+                .setLngLat(coordinates)
+                .setHTML(description)
+                .addTo(map);
+        });
+
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        map.on('mouseenter', 'utilitiesicons', function() {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'utilitiesicons', function() {
+            map.getCanvas().style.cursor = '';
+        });
+	});
 	</script>
 
 	</body>

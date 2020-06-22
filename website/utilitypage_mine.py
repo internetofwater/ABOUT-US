@@ -96,7 +96,7 @@ Newest_Updates = Newest_Updates[~Newest_Updates['PWSID'].astype(str).str.startsw
 
 
 html_page = urlopen("https://www.ncwater.org/Drought_Monitoring/statusReport.php") #grab the links in a usable format
-soup = BeautifulSoup(html_page)
+soup = BeautifulSoup(html_page, features="lxml")
 ev_list = []
 for tag in soup.find_all('tr'):
     Answer = tag.find_all('a')
@@ -109,7 +109,7 @@ Link_Dataframe.columns = ["External Links"]
 Bigger_Dataframe = pd.merge(Newest_Updates, Link_Dataframe, left_index=True, right_index=True)
 Bigger_Dataframe
 
-StateWide = gpd.read_file(r"/Users/Peytoncox/Desktop/DATA+/NC_statewide_CWS_areas.gpkg") #make large usable dataframe with both names and links
+StateWide = gpd.read_file(r"/Users/benwilliams/Documents/Data+/ABOUT-US/Boundaries/NC_statewide_CWS_areas.gpkg") #make large usable dataframe with both names and links
 StateWide.geometry= StateWide.geometry.to_crs(epsg="4326")
 Combined_Utility = pd.merge(Bigger_Dataframe, StateWide, 'right', on="PWSID")
 
