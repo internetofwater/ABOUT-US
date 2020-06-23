@@ -3,7 +3,7 @@
 	<nav>
 		<a href="/">Home</a>
 		<a href="./utilityfinder">Utility Finder</a>
-		<a>Interactive Map</a>
+		<a href="./search">Interactive Map</a>
 	</nav>
 	<head>
 		<script src='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js'></script>
@@ -12,6 +12,15 @@
 	</head>
 	<body>
 	<h1>Result</h1>
+	<p>{% if gran == 'zipcode_level' %}
+		"Warning: Address was unreadable so using zipcode to display utilities"
+		{% endif %}
+	</p>
+	<br><br>
+	<p>{% if uname == 'None' %}
+		"Warning: No utility for your area to display"
+		{% endif %}
+	</p>
 	<p>Address is: {{ad}}, Zipcode is: {{zipc}}, State is: {{st}}</p>
 	<br><br>
 	<p>Latitude is: {{lat}}, Longitude is {{lon}} </p>
