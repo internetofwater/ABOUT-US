@@ -56,6 +56,25 @@ def search():
     else:
         return render_template("interactive_map.html")
 
+@app.route('/nwis_data/<path:site_no>',methods=['GET'])
+def send_data(site_no):
+    query = """SELECT ts, signal FROM nwis.daily WHERE nwis_site_no = '{}'""".format(site_no)
+    data = pd.read_sql_query(query, cnx)# get site_data from sql 
+    data['ts'] = data['ts'].apply(lambda x: x.strftime("%Y-%m-%d") )
+    # {"dates": [1,2,3,4], "signal": [1,2,3,4]}
+
+    return jsonify(**data.to_dict('split'))
+
+# use these when you need to create/alter tables. DO NOT allow them to be displayed/served on a webpage, or check them into git
+
+
+
+
+
+@app.route('/node_modules/<path:path>')
+def send_js(path):
+    return send_from_directory('node_modules', path)
+
 
 locator = Nominatim(user_agent="otherGeocoder")
 
@@ -92,6 +111,19 @@ def display_message(geocode_zip):
         #return render_template("search.html", zip_lat= zip_latitude, zip_long= zip_longitude, ad= address, zipc=zipcode, st=state)
 '''
 
+hostname = 'rapid-1304.vm.duke.edu'
+port = '5432'
+username = 'group3_read'
+password = 'water3all4me'
+dbname = 'postgres'
+
+
+postgres_str = 'postgresql://{username}:{password}@{hostname}:{port}/{dbname}'.format(hostname=hostname,
+                                                                                 port=port,
+                                                                                 username=username,
+                                                                                  password=password,
+                                                                                 dbname=dbname)
+cnx = create_engine(postgres_str)
 
 response = requests.get('https://www.ncwater.org/Drought_Monitoring/statusReport.php/')  #conservation status info webscraping
 stored_contents = lh.fromstring(response.content)
