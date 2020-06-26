@@ -6,7 +6,7 @@ Created on Thu Jun  4 09:38:45 2020
 @author: benwilliams
 """
 
-from flask import Flask, request
+from flask import Flask, request, send_from_directory
 from flask import render_template
 from geopy.geocoders import Nominatim
 import pandas as pd
@@ -22,7 +22,7 @@ from urllib.request import urlopen
 import requests
 import lxml.html as lh
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 
 @app.route('/')
 def home_page():
@@ -33,6 +33,10 @@ def utiltyfinder():
     return render_template('utilityfinder.html')
 
 
+@app.route('/graphpage')
+def graphpage():
+    #streamDataToPlot, graphTitle = graphThisData()
+    return render_template('graphpage.html')  #sdtp=streamDataToPlot, gtt=graphTitle)
 
 @app.route('/search', methods=["GET", "POST"])
 def search():
@@ -48,11 +52,42 @@ def search():
             latitude, longitude = geocode(addressfull)
             utility = correct_utility_function(latitude, longitude)
             (utility3, link2) = utility
-            print(utility3)
-            print(link2)
+            mockGageData = pd.read_csv(r"/Users/benwilliams/Documents/Data+/nwis_data_mock.csv", header=0, names=['date', 'value', 'data_type', 'nwis_site_no'])
+        numberToName = pd.read_csv(r"/Users/benwilliams/Documents/Data+/nwis_site_info.csv")
+        inputSite = '02043433'
+        df2 = mockGageData[mockGageData['nwis_site_no']== inputSite]
+        df3 = df2[['date', 'value']]
+        sdtp = df3.to_csv(index=False)
+        df4 = numberToName[numberToName['0']== inputSite]
+        if df2.data_type[1] == 60:
+            dataToPlot = sdtp.replace('value', 'height')
+        elif df2.data_type[1] == 65:
+            dataToPlot = sdtp.replace('value', 'flow rate')
+        else:
+            dataToPlot = sdtp.replace('value', 'precipitation')
+        gageTitle = df4['1'][0]
+        return render_template("search.html", lat=latitude, lon=longitude, ad=address, zipc=zipcode, st=state, uname=utility3, linkname=link2, dtp = dataToPlot, gtt = gageTitle)
 
-            return render_template("search.html", lat=latitude, lon=longitude, ad=address, zipc=zipcode, st=state, uname=utility3, linkname=link2)
+@app.route('/node_modules/<path:path>')
+def send_js(path):
+    return send_from_directory('node_modules', path)
 
+def graphThisData():
+    mockGageData = pd.read_csv(r"/Users/benwilliams/Documents/Data+/nwis_data_mock.csv", header=0, names=['date', 'value', 'data_type', 'nwis_site_no'])
+    numberToName = pd.read_csv(r"/Users/benwilliams/Documents/Data+/nwis_site_info.csv")
+    inputSite = '02043433'
+    df2 = mockGageData[mockGageData['nwis_site_no']== inputSite]
+    df3 = df2[['date', 'value']]
+    sdtp = df3.to_csv(index=False)
+    df4 = numberToName[numberToName['0']== inputSite]
+    if df2.data_type[1] == 60:
+        dataToPlot = sdtp.replace('value', 'height')
+    elif df2.data_type[1] == 65:
+        dataToPlot = sdtp.replace('value', 'flow rate')
+    else:
+        dataToPlot = sdtp.replace('value', 'precipitation')
+    gageTitle = df4['1'][0]
+    return dataToPlot, gageTitle
 
 locator = Nominatim(user_agent="otherGeocoder")
 
