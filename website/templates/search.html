@@ -76,8 +76,8 @@
 		var map = new mapboxgl.Map({
 			container: 'map',
 			style: 'mapbox://styles/btw19/ckb9tgy821c6j1itda2ynmftu', // stylesheet location
-			center: [-79, 35.99], // starting position [lng, lat]
-			zoom: 6 // starting zoom
+			center: [{{lon}}, {{lat}}], // starting position [lng, lat]
+			zoom: 7.5 // starting zoom
 		});
 
 		map.on('load', function() {
