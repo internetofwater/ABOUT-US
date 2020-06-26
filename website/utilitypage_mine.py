@@ -6,7 +6,7 @@ Created on Thu Jun  4 09:38:45 2020
 @author: benwilliams
 """
 
-from flask import Flask, request, send_from_directory
+from flask import Flask, request, send_from_directory, jsonify
 from flask import render_template
 from geopy.geocoders import Nominatim
 import pandas as pd
@@ -16,6 +16,7 @@ import geopy
 from shapely.geometry import Polygon, Point, MultiPolygon
 import shapefile
 from matplotlib import pyplot as plt
+from sqlalchemy import create_engine
 
 from tkinter import messagebox
 import functools
@@ -36,7 +37,6 @@ def utiltyfinder():
     return render_template('utilityfinder.html')
 
 
-<<<<<<< HEAD
 @app.route('/search', methods=["GET", "POST"]) #POST requests that a web server accepts the data enclosed in the body of the request message
 def search():
     if request.method == "POST":       #GET- retrieves information from the server
@@ -68,69 +68,9 @@ def send_data(site_no):
 
 # use these when you need to create/alter tables. DO NOT allow them to be displayed/served on a webpage, or check them into git
 
-
-
-
-=======
-@app.route('/graphpage')
-def graphpage():
-    #streamDataToPlot, graphTitle = graphThisData()
-    return render_template('graphpage.html')  #sdtp=streamDataToPlot, gtt=graphTitle)
-
-@app.route('/search', methods=["GET", "POST"])
-def search():
-        if request.method == "POST":
-            lista = []
-            address = request.form["address"]
-            zipcode = request.form["zipcode"]
-            state = request.form["state"]
-            lista.append(address)
-            lista.append(zipcode)
-            lista.append(state)
-            addressfull = ', '.join(lista)
-            latitude, longitude = geocode(addressfull)
-            utility = correct_utility_function(latitude, longitude)
-            (utility3, link2) = utility
-            mockGageData = pd.read_csv(r"/Users/benwilliams/Documents/Data+/nwis_data_mock.csv", header=0, names=['date', 'value', 'data_type', 'nwis_site_no'])
-        numberToName = pd.read_csv(r"/Users/benwilliams/Documents/Data+/nwis_site_info.csv")
-        inputSite = '02043433'
-        df2 = mockGageData[mockGageData['nwis_site_no']== inputSite]
-        df3 = df2[['date', 'value']]
-        sdtp = df3.to_csv(index=False)
-        df4 = numberToName[numberToName['0']== inputSite]
-        if df2.data_type[1] == 60:
-            dataToPlot = sdtp.replace('value', 'height')
-        elif df2.data_type[1] == 65:
-            dataToPlot = sdtp.replace('value', 'flow rate')
-        else:
-            dataToPlot = sdtp.replace('value', 'precipitation')
-        gageTitle = df4['1'][0]
-        return render_template("search.html", lat=latitude, lon=longitude, ad=address, zipc=zipcode, st=state, uname=utility3, linkname=link2, dtp = dataToPlot, gtt = gageTitle)
->>>>>>> jsgraphing
-
 @app.route('/node_modules/<path:path>')
 def send_js(path):
     return send_from_directory('node_modules', path)
-
-<<<<<<< HEAD
-=======
-def graphThisData():
-    mockGageData = pd.read_csv(r"/Users/benwilliams/Documents/Data+/nwis_data_mock.csv", header=0, names=['date', 'value', 'data_type', 'nwis_site_no'])
-    numberToName = pd.read_csv(r"/Users/benwilliams/Documents/Data+/nwis_site_info.csv")
-    inputSite = '02043433'
-    df2 = mockGageData[mockGageData['nwis_site_no']== inputSite]
-    df3 = df2[['date', 'value']]
-    sdtp = df3.to_csv(index=False)
-    df4 = numberToName[numberToName['0']== inputSite]
-    if df2.data_type[1] == 60:
-        dataToPlot = sdtp.replace('value', 'height')
-    elif df2.data_type[1] == 65:
-        dataToPlot = sdtp.replace('value', 'flow rate')
-    else:
-        dataToPlot = sdtp.replace('value', 'precipitation')
-    gageTitle = df4['1'][0]
-    return dataToPlot, gageTitle
->>>>>>> jsgraphing
 
 locator = Nominatim(user_agent="otherGeocoder")
 
@@ -169,8 +109,8 @@ def display_message(geocode_zip):
 
 hostname = 'rapid-1304.vm.duke.edu'
 port = '5432'
-username = 'group3_read'
-password = 'water3all4me'
+username = os.environ['USERNAME']
+password = os.environ['PASSWORD']
 dbname = 'postgres'
 
 
