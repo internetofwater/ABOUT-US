@@ -36,6 +36,12 @@ def home_page():
 def utiltyfinder():
     return render_template('utilityfinder.html')
 
+@app.route('/map')
+def serve_map():
+    lat = request.args.get('lat')
+    lon = request.args.get('lon')
+    return render_template('index.html', lat=lat, lon=lon)
+
 
 @app.route('/search', methods=["GET", "POST"]) #POST requests that a web server accepts the data enclosed in the body of the request message
 def search():
@@ -228,4 +234,3 @@ def correct_utility_function(latitude, longitude):
                 return(utility1.iloc[i], link.iloc[i])
 
     return None, None
-
