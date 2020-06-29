@@ -34,11 +34,12 @@
 
 	<iframe src="map?lat={{lat}}&lon={{lon}}" style='width: 600px; height: 500px;'></iframe>
 	<div>
-		<div id='map' style='float: left; width: 800px; height: 500px;'></div>
+		<div id='map2' style='float: left; width: 800px; height: 500px;'></div>
 		<div id="graphdiv" style="float: right; width:600px; height:500px;"></div>
 	</div>
 	<script type="text/javascript">
-
+		var x = document.getElementById("graphdiv")
+		//x.style.display = "none";
 		var getJSON = function(url, callback) {
 		    var xhr = new XMLHttpRequest();
 		    xhr.open('GET', url, true);
@@ -59,7 +60,7 @@
 	g = new Dygraph(
 
       // containing div
-      document.getElementById("graphdiv"),
+      x,
 
       // CSV or path to a CSV file.
       data,
@@ -72,7 +73,7 @@
 
 		mapboxgl.accessToken = 'pk.eyJ1IjoiYnR3MTkiLCJhIjoiY2tiOGR6MzI1MDNjaTJ0c3hnZHBmODRneSJ9.QVj1xKQ--FUvtw6soygk9g';
 		var map = new mapboxgl.Map({
-			container: 'map',
+			container: 'map2',
 			style: 'mapbox://styles/btw19/ckb9tgy821c6j1itda2ynmftu', // stylesheet location
 			center: [{{lon}}, {{lat}}], // starting position [lng, lat]
 			zoom: 7.5 // starting zoom
@@ -86,49 +87,49 @@
 			});
       
       map.addSource('utilitiesicons', {
-'type': 'geojson',
-'data': {
-'type': 'FeatureCollection',
-'features': [
-{
-'type': 'Feature',
-'properties': {
-'description': '<a href="https://google.com">One</a>',
-'siteNumber': '02043433',
-'iconSize': [60, 60]
-},
-'geometry': {
-'type': 'Point',
-'coordinates': [-77.2, 35.3]
-}
-},
-{
-'type': 'Feature',
-'properties': {
-'description': '<a href="https://google.com">Two</a>',
-'siteNumber': '02053200',
-'iconSize': [50, 50]
-},
-'geometry': {
-'type': 'Point',
-'coordinates': [-79.1, 35.99]
-}
-},
-{
-'type': 'Feature',
-'properties': {
-'description': '<a href="https://google.com">Three</a>',
-'siteNumber': '02069000',
-'iconSize': [40, 40]
-},
-'geometry': {
-'type': 'Point',
-'coordinates': [-80, 34.9]
-}
-}
-]
-}
-});
+		'type': 'geojson',
+		'data': {
+		'type': 'FeatureCollection',
+		'features': [
+		{
+		'type': 'Feature',
+		'properties': {
+		'description': '<a href="https://google.com">One</a>',
+		'siteNumber': '02043433',
+		'iconSize': [60, 60]
+		},
+		'geometry': {
+		'type': 'Point',
+		'coordinates': [-77.2, 35.3]
+		}
+		},
+		{
+		'type': 'Feature',
+		'properties': {
+		'description': '<a href="https://google.com">Two</a>',
+		'siteNumber': '02053200',
+		'iconSize': [50, 50]
+		},
+		'geometry': {
+		'type': 'Point',
+		'coordinates': [-79.1, 35.99]
+		}
+		},
+		{
+		'type': 'Feature',
+		'properties': {
+		'description': '<a href="https://google.com">Three</a>',
+		'siteNumber': '02069000',
+		'iconSize': [40, 40]
+		},
+		'geometry': {
+		'type': 'Point',
+		'coordinates': [-80, 34.9]
+		}
+		}
+		]
+		}
+		});
 	 map.addLayer({
             'id': 'utilitiesicons',
             'type': 'symbol',
@@ -180,7 +181,8 @@
 				console.log("foo"); 
 			}
 			console.log(data); 	
-			g.updateOptions({'file': data.data})})//console.log(result.rows[0]['signal'])});         
+			g.updateOptions({'file': data.data})})//console.log(result.rows[0]['signal'])});
+			//x.style.display = "block; float: right; width:600px; height:500px;";         
 
    //          client.connect();
 			// client
