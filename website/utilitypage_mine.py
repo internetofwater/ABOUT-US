@@ -18,8 +18,11 @@ import shapefile
 from matplotlib import pyplot as plt
 from sqlalchemy import create_engine
 
+<<<<<<< HEAD
+=======
 from tkinter import messagebox
 import functools
+>>>>>>> website_skeleton
 
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
@@ -45,6 +48,38 @@ def serve_map():
 
 @app.route('/search', methods=["GET", "POST"]) #POST requests that a web server accepts the data enclosed in the body of the request message
 def search():
+<<<<<<< HEAD
+        if request.method == "POST":
+            lista = []
+            address = request.form["address"]
+            zipcode = request.form["zipcode"]
+            state = request.form["state"]
+            lista.append(address)
+            lista.append(zipcode)
+            lista.append(state)
+            addressfull = ', '.join(lista)
+            latitude, longitude = geocode(addressfull)
+            utility = correct_utility_function(latitude, longitude)
+            (utility3, link2) = utility
+            # mockGageData = pd.read_csv(r"/Users/benwilliams/Documents/Data+/nwis_data_mock.csv", header=0, names=['date', 'value', 'data_type', 'nwis_site_no'])
+            folder = 'C:\\Users\\wyseg\\'
+
+            mockGageData = pd.read_csv(os.path.join(folder, 'nwis_data_mock.csv'), header=0, names=['date', 'value', 'data_type', 'nwis_site_no'])
+        numberToName = pd.read_csv(os.path.join(folder, 'nwis_site_info.csv'))
+        inputSite = '02043433'
+        df2 = mockGageData[mockGageData['nwis_site_no']== inputSite]
+        df3 = df2[['date', 'value']]
+        sdtp = df3.to_csv(index=False)
+        df4 = numberToName[numberToName['0']== inputSite]
+        if df2.data_type[1] == 60:
+            dataToPlot = sdtp.replace('value', 'height')
+        elif df2.data_type[1] == 65:
+            dataToPlot = sdtp.replace('value', 'flow rate')
+        else:
+            dataToPlot = sdtp.replace('value', 'precipitation')
+        gageTitle = df4['1'][0]
+        return render_template("search.html", lat=latitude, lon=longitude, ad=address, zipc=zipcode, st=state, uname=utility3, linkname=link2, dtp = dataToPlot, gtt = gageTitle)
+=======
     if request.method == "POST":       #GET- retrieves information from the server
         address = request.form["address"]
         zipcode = request.form["zipcode"]
@@ -73,6 +108,22 @@ def send_data(site_no):
     return jsonify(**data.to_dict('split'))
 
 # use these when you need to create/alter tables. DO NOT allow them to be displayed/served on a webpage, or check them into git
+>>>>>>> website_skeleton
+
+@app.route('/nwis_data/<path:site_no>',methods=['GET'])
+def send_data(site_no):
+    query = """SELECT ts, signal FROM nwis.daily WHERE nwis_site_no = '{}'""".format(site_no)
+    data = pd.read_sql_query(query, cnx)# get site_data from sql 
+    data['ts'] = data['ts'].apply(lambda x: x.strftime("%Y-%m-%d") )
+    # {"dates": [1,2,3,4], "signal": [1,2,3,4]}
+
+    return jsonify(**data.to_dict('split'))
+
+# use these when you need to create/alter tables. DO NOT allow them to be displayed/served on a webpage, or check them into git
+
+
+
+
 
 @app.route('/node_modules/<path:path>')
 def send_js(path):
@@ -96,6 +147,12 @@ def geocode (address, zipcode, state):  #geocoder address to coordinates
         return 0,0, "failure" 
 
 
+<<<<<<< HEAD
+hostname = 'rapid-1304.vm.duke.edu'
+port = '5432'
+username = 'group3_read'
+password = 'water3all4me'
+=======
 def geocode_zip (halfaddress):
     listb = []
     listb.append(zipcode)
@@ -117,6 +174,7 @@ hostname = 'rapid-1304.vm.duke.edu'
 port = '5432'
 username = os.environ['USERNAME']
 password = os.environ['PASSWORD']
+>>>>>>> website_skeleton
 dbname = 'postgres'
 
 
@@ -127,6 +185,10 @@ postgres_str = 'postgresql://{username}:{password}@{hostname}:{port}/{dbname}'.f
                                                                                  dbname=dbname)
 cnx = create_engine(postgres_str)
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> website_skeleton
 response = requests.get('https://www.ncwater.org/Drought_Monitoring/statusReport.php/')  #conservation status info webscraping
 stored_contents = lh.fromstring(response.content)
 table_elements = stored_contents.xpath('//tr')
@@ -169,7 +231,8 @@ Link_Dataframe.columns = ["External Links"]
 Bigger_Dataframe = pd.merge(Newest_Updates, Link_Dataframe, left_index=True, right_index=True)
 Bigger_Dataframe
 
-StateWide = gpd.read_file(r"/Users/benwilliams/Documents/Data+/ABOUT-US/Boundaries/NC_statewide_CWS_areas.gpkg") #make large usable dataframe with both names and links
+filepath = os.path.join('..','Boundaries', 'NC_statewide_CWS_areas.gpkg')
+StateWide = gpd.read_file(filepath) #make large usable dataframe with both names and links
 StateWide.geometry= StateWide.geometry.to_crs(epsg="4326")
 Combined_Utility = pd.merge(Bigger_Dataframe, StateWide, 'right', on="PWSID")
 
