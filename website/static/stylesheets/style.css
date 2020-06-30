@@ -1,0 +1,53 @@
+
+/* style.css */
+
+main {
+	display: grid;
+	grid-gap: 20px;
+	grid-template-columns: 150px 300px 271px;
+	justify-content: center;
+	align-content: center;
+}
+
+.profile img{
+	height: 200px;
+	width: auto;
+}
+
+.caption {
+	text-align: center;
+}
+
+li {
+	display: inline-block;
+	z-index: 2;
+    position: relative;
+}
+
+.delete-later p {
+	font-family: 'Nanum Gothic', sans-serif;
+	z-index: 2;
+    position: relative;
+}
+
+.delete-later h1 {
+	font-family: 'Nanum Gothic', sans-serif;
+	z-index: 2;
+    position: relative;
+}
+
+.delete-later h3 {
+	font-family: 'Nanum Gothic', sans-serif;
+	z-index: 2;
+    position: relative;
+}
+
+.delete-later img {
+	position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+    opacity: 0.45;
+}

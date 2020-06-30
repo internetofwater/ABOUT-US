@@ -27,6 +27,7 @@ import requests
 import lxml.html as lh
 
 app = Flask(__name__, static_url_path='')
+app.static_folder = 'static'
 
 @app.route('/')
 def home_page():
@@ -102,12 +103,7 @@ def geocode_zip (zipcode, state):
         return zip_middle.latitude, zip_middle.longitude, "zipcode_level"
     except:
         return 0,0, "failure"
-'''
-def display_message(geocode_zip):
-    if geocode_zip.has_been_called = True:
-        tkinter.messagebox.showinfo(title="Warning", message="Address was unreadable so displaying utilities based on zipcode")
-        #return render_template("search.html", zip_lat= zip_latitude, zip_long= zip_longitude, ad= address, zipc=zipcode, st=state)
-'''
+
 
 hostname = 'rapid-1304.vm.duke.edu'
 port = '5432'
@@ -166,7 +162,7 @@ Bigger_Dataframe = pd.merge(Newest_Updates, Link_Dataframe, left_index=True, rig
 Bigger_Dataframe
 
 filepath = os.path.join('..', 'Boundaries', 'NC_statewide_CWS_areas.gpkg')
-StateWide = gpd.read_file(r"/Users/benwilliams/Documents/Data+/ABOUT-US/Boundaries/NC_statewide_CWS_areas.gpkg") #make large usable dataframe with both names and links
+StateWide = gpd.read_file(r"/Users/peytoncox/Desktop/DATA+/ABOUT-US/Boundaries/NC_statewide_CWS_areas.gpkg") #make large usable dataframe with both names and links
 StateWide.geometry= StateWide.geometry.to_crs(epsg="4326")
 Combined_Utility = pd.merge(Bigger_Dataframe, StateWide, 'right', on="PWSID")
 
