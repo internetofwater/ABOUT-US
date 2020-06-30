@@ -4,24 +4,7 @@
 	font-family: 'Nanum Gothic', sans-serif;
 	background-color: lightblue;
 }
-/*
-.top_corner{
-	text-align: center;
-  	border: none;
-  	color: white;
-  	padding: 10px 25px;
-  	text-align: center;
-  	text-decoration: none;
-  	display: inline-block;
-  	font-size: 16px;
-  	margin: 4px 2px;
-  	transition-duration: 0.4s;
-  	cursor: pointer;
-  	background-color: white; 
-  	color: black; 
-  	border: 2px solid white;
-}
-*/
+
 .top_corner:hover {
   	background-color: #008CBA;
   	color: white;
@@ -44,7 +27,7 @@
   	border: 2px solid white;
 }
 
-.content {
+.internallinks {
 	text-align: center;
 }
 
@@ -88,4 +71,9 @@ li {
 
 .homeheader {
 	text-align: center;
+}
+
+.cornerlogo img {
+	width: 150px;
+	height: auto;
 }
