@@ -113,71 +113,9 @@
 
   
 
-      map.on('load', function() {
+     
 
-
-        map.addSource('utilities-simplest', {
-
-
-
-          'type': 'vector',
-
-
-
-          'url': 'mapbox://btw19.2fhcidlx'
-
-
-
-        });
-
-
-        map.addLayer({
-
-          'id': 'utilities-simplest-viz',
-
-            'source-layer': 'EvenSimplerPolygonsNC-9cvs7f',
-
-            'type': 'fill',
-
-            'source': 'utilities-simplest',
-
-            'maxzoom': 6.99,
-                        'paint': {
-                    'fill-color': '#4EE91E',
-                    'fill-opacity': [
-                              'case',
-                              ['boolean', ['feature-state', 'hover'], false],
-                              0.5,
-                              0.2
-                          ]
-                        }
-
-      })
-
-        map.addLayer({
-
-          'id': 'utilities-simplest-border-viz',
-
-            'source-layer': 'EvenSimplerPolygonsNC-9cvs7f',
-
-            'type': 'line',
-
-            'source': 'utilities-simplest',
-
-            'maxzoom': 6.99,
-
-            'paint': {
-
-             'line-color': '#4EE91E',
-
-             'line-width':2
-            
-
-          }
-
-
-      });
-    });
+   
 
 map.on('load', function() {
 map.loadImage(
@@ -206,7 +144,7 @@ map.addLayer({
 'source': 'point',
 'layout': {
 'icon-image': 'cat',
-'icon-size': 0.25
+'icon-size': 0.1
 }
 });
 }
