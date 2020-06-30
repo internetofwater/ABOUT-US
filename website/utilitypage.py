@@ -61,7 +61,8 @@ def search():
 
 @app.route('/nwis_data/<path:site_no>',methods=['GET'])
 def send_data(site_no):
-    query = """SELECT ts, signal FROM nwis.daily WHERE nwis_site_no = '{}'""".format(site_no)
+    query = """SELECT a.*, b.site_name FROM nwis.daily a JOIN nwis.sites b 
+ON a.nwis_site_no = b.nwis_site_no WHERE a.nwis_site_no = '{}'""".format(site_no)
     data = pd.read_sql_query(query, cnx)# get site_data from sql 
     data['ts'] = data['ts'].apply(lambda x: x.strftime("%Y-%m-%d") )
     # {"dates": [1,2,3,4], "signal": [1,2,3,4]}
@@ -166,7 +167,7 @@ Bigger_Dataframe = pd.merge(Newest_Updates, Link_Dataframe, left_index=True, rig
 Bigger_Dataframe
 
 filepath = os.path.join('..', 'Boundaries', 'NC_statewide_CWS_areas.gpkg')
-StateWide = gpd.read_file(r"/Users/benwilliams/Documents/Data+/ABOUT-US/Boundaries/NC_statewide_CWS_areas.gpkg") #make large usable dataframe with both names and links
+StateWide = gpd.read_file(filepath) #make large usable dataframe with both names and links
 StateWide.geometry= StateWide.geometry.to_crs(epsg="4326")
 Combined_Utility = pd.merge(Bigger_Dataframe, StateWide, 'right', on="PWSID")
 

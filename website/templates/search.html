@@ -32,10 +32,12 @@
 	<p>Utility is: {{uname}}</p><br>
 	<p>Conservation plan information: <a href={{linkname}} target="_blank">{{linkname}}</a> </p>
 
-	<iframe src="map?lat={{lat}}&lon={{lon}}" style='width: 600px; height: 500px;'></iframe>
+	<!-- <iframe src="map?lat={{lat}}&lon={{lon}}" style='width: 600px; height: 500px;'></iframe> -->
 	<div>
 		<div id='map2' style='float: left; width: 800px; height: 500px;'></div>
-		<div id="graphdiv" style="float: right; width:600px; height:500px;"></div>
+		<div id="bigdiv" style="display: block;">
+			<div id="graphdiv" style="float: right; width:600px; height:500px;"></div>
+		</div>
 	</div>
 	<script type="text/javascript">
 		var x = document.getElementById("graphdiv")
@@ -86,64 +88,66 @@
 				'data': 'mapbox://btw19.2fhcidlx'
 			});
       
-      map.addSource('utilitiesicons', {
-		'type': 'geojson',
-		'data': {
-		'type': 'FeatureCollection',
-		'features': [
-		{
-		'type': 'Feature',
-		'properties': {
-		'description': '<a href="https://google.com">One</a>',
-		'siteNumber': '02043433',
-		'iconSize': [60, 60]
-		},
-		'geometry': {
-		'type': 'Point',
-		'coordinates': [-77.2, 35.3]
-		}
-		},
-		{
-		'type': 'Feature',
-		'properties': {
-		'description': '<a href="https://google.com">Two</a>',
-		'siteNumber': '02053200',
-		'iconSize': [50, 50]
-		},
-		'geometry': {
-		'type': 'Point',
-		'coordinates': [-79.1, 35.99]
-		}
-		},
-		{
-		'type': 'Feature',
-		'properties': {
-		'description': '<a href="https://google.com">Three</a>',
-		'siteNumber': '02069000',
-		'iconSize': [40, 40]
-		},
-		'geometry': {
-		'type': 'Point',
-		'coordinates': [-80, 34.9]
-		}
-		}
-		]
-		}
-		});
-	 map.addLayer({
-            'id': 'utilitiesicons',
-            'type': 'symbol',
-            'source': 'utilitiesicons',
-            'layout': {
-                'icon-image': 'rocket-15',
-                'icon-allow-overlap': true
-            }
-        });
+		    map.addSource('utilitiesicons', {
+				'type': 'geojson',
+				'data': {
+				'type': 'FeatureCollection',
+				'features': [
+				{
+				'type': 'Feature',
+				'properties': {
+				'description': '<a href="https://google.com">One</a>',
+				'siteNumber': '02043433',
+				'iconSize': [60, 60]
+				},
+				'geometry': {
+				'type': 'Point',
+				'coordinates': [-77.2, 35.3]
+				}
+				},
+				{
+				'type': 'Feature',
+				'properties': {
+				'description': '<a href="https://google.com">Two</a>',
+				'siteNumber': '02053200',
+				'iconSize': [50, 50]
+				},
+				'geometry': {
+				'type': 'Point',
+				'coordinates': [-79.1, 35.99]
+				}
+				},
+				{
+				'type': 'Feature',
+				'properties': {
+				'description': '<a href="https://google.com">Three</a>',
+				'siteNumber': '02069000',
+				'iconSize': [40, 40]
+				},
+				'geometry': {
+				'type': 'Point',
+				'coordinates': [-80, 34.9]
+				}
+				}
+				]
+				}
+				});
+			map.addLayer({
+		            'id': 'utilitiesicons',
+		            'type': 'symbol',
+		            'source': 'utilitiesicons',
+		            'layout': {
+		                'icon-image': 'rocket-15',
+		                'icon-allow-overlap': true
+		            }
+		        });
 			// Add a layer showing the state polygons.
 			map.addLayer({
 				'id': 'utilities-layer',
 				'type': 'fill',
 				'source': 'utilities',
+				//'source-layer': 'utilities',
+				'layout': {},
 				'paint': {
 					'fill-color': 'rgba(200, 100, 240, 0.4)',
 					'fill-outline-color': 'rgba(200, 100, 240, 1)'
@@ -173,23 +177,27 @@
             var description = e.features[0].properties.description;
             var siteNumber = e.features[0].properties.siteNumber;
 
-			getJSON(`/nwis_data/${siteNumber}`, function(err, data) {
-			new_data = [];
-			console.log("stuff")
-			for (i=0; i<data.data.length; i++) {
-				data.data[i][0] = new Date(data.data[i][0]);
-				console.log("foo"); 
-			}
-			console.log(data); 	
-			g.updateOptions({'file': data.data})})//console.log(result.rows[0]['signal'])});
-			//x.style.display = "block; float: right; width:600px; height:500px;";         
-
-   //          client.connect();
-			// client
-			//   .query("SELECT signal FROM nwis.daily WHERE nwis_site_no = $1", [site_no])
-			//   .then(result => {data = initialFunction(result.rows); g.updateOptions({'file': data})})//console.log(result.rows[0]['signal']))
-			//   .catch(e => console.error(e.stack))
-			//   .then(() => client.end())
+				getJSON(`/nwis_data/${siteNumber}`, function(err, data) {
+					new_data = [];
+					//console.log("stuff")
+					for (i=0; i<data.data.length; i++) {
+						data.data[i][0] = new Date(data.data[i][0]);
+						//console.log("foo"); 
+					}
+					for (var k = 0; k < data.data.length; k++) {
+				    new_data[k] = [];
+				    	for (var j = 0; j < 2; j++) {
+				       		new_data[k][j] = data.data[k][j];
+				    	}
+					}
+					console.log(new_data); 	
+					g.updateOptions({
+									'file': new_data,
+									'title': data.data[0][4],
+									'labels': ["Date", data.data[0][2]]
+									})
+				});//console.log(result.rows[0]['signal'])});
+			//document.getElementById("bigdiv").style.display = "inline-block";   
 
             // Ensure that if the map is zoomed out such that multiple
             // copies of the feature are visible, the popup appears
