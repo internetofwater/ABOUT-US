@@ -162,7 +162,7 @@ Bigger_Dataframe = pd.merge(Newest_Updates, Link_Dataframe, left_index=True, rig
 Bigger_Dataframe
 
 filepath = os.path.join('..', 'Boundaries', 'NC_statewide_CWS_areas.gpkg')
-StateWide = gpd.read_file(filpath) #make large usable dataframe with both names and links
+StateWide = gpd.read_file(filepath) #make large usable dataframe with both names and links
 StateWide.geometry= StateWide.geometry.to_crs(epsg="4326")
 Combined_Utility = pd.merge(Bigger_Dataframe, StateWide, 'right', on="PWSID")
 
