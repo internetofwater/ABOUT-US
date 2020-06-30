@@ -27,6 +27,7 @@ import requests
 import lxml.html as lh
 
 app = Flask(__name__, static_url_path='')
+app.static_folder = 'static'
 
 @app.route('/')
 def home_page():
@@ -103,12 +104,7 @@ def geocode_zip (zipcode, state):
         return zip_middle.latitude, zip_middle.longitude, "zipcode_level"
     except:
         return 0,0, "failure"
-'''
-def display_message(geocode_zip):
-    if geocode_zip.has_been_called = True:
-        tkinter.messagebox.showinfo(title="Warning", message="Address was unreadable so displaying utilities based on zipcode")
-        #return render_template("search.html", zip_lat= zip_latitude, zip_long= zip_longitude, ad= address, zipc=zipcode, st=state)
-'''
+
 
 hostname = 'rapid-1304.vm.duke.edu'
 port = '5432'
