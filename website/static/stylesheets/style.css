@@ -85,3 +85,7 @@ li {
   	grid-column-end: 3;
   	text-align: center;
   }
+
+.homeheader {
+	text-align: center;
+}
