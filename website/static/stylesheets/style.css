@@ -4,12 +4,31 @@
 	font-family: 'Nanum Gothic', sans-serif;
 	background-color: lightblue;
 }
-
+/*
 .top_corner{
-	display: grid;
-	grid-template-columns: 99px 147px 169px;
-	justify-content: center;
-	align-content: center;
+	text-align: center;
+  	border: none;
+  	color: white;
+  	padding: 10px 25px;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+  	font-size: 16px;
+  	margin: 4px 2px;
+  	transition-duration: 0.4s;
+  	cursor: pointer;
+  	background-color: white; 
+  	color: black; 
+  	border: 2px solid white;
+}
+*/
+.top_corner:hover {
+  	background-color: #008CBA;
+  	color: white;
+}
+
+.top_corner {
+	text-align: center;
   	border: none;
   	color: white;
   	padding: 10px 25px;
@@ -25,9 +44,8 @@
   	border: 2px solid white;
 }
 
-.top_corner:hover {
-  	background-color: #008CBA;
-  	color: white;
+.content {
+	text-align: center;
 }
 
 h1 {
