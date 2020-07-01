@@ -1,9 +1,76 @@
 
 /* style.css */
+
 * {
 	font-family: 'Nanum Gothic', sans-serif;
-	background-color: lightblue;
 }
+/*
+header {
+	background-color: #466995;
+  	border-bottom: 1px solid #466995;
+	width: 100%;
+	height: 51px;
+	border-top: 1px solid #466995;
+}
+*/
+
+body {
+  margin: 0;
+  background-color: lightblue;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav img {
+	height: 48px;
+	width: auto;
+	float: right;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/*Homepage*/
+h1 {
+	font-weight: 800;
+	text-align: center;
+}
+
+li {
+	display: inline-block;
+}
+
+form hr {
+  width: 15%;
+}
+
+form {
+  text-align: center;
+  line-height: 30px;
+  height: 80%;
+  overflow: auto;
+}
+
+
 
 .top_corner:hover {
   	background-color: #008CBA;
@@ -31,10 +98,6 @@
 	text-align: center;
 }
 
-h1 {
-	font-weight: 800;
-}
-
 .undergraduates {
 	display: grid;
 	grid-gap: 20px;
@@ -59,10 +122,6 @@ h1 {
 	width: 100%;
 	display: grid;
     grid-template-columns: 25% 50% 25%;
-}
-
-li {
-	display: inline-block;
 }
 
 .a{
@@ -98,3 +157,17 @@ li {
 .endtag {
 	display: inline-block;
 }
+
+#overlay {
+  width: 35%;
+  margin: 3% auto;
+  height: 70vh;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 40px;
+}
+
+#utfindertitle {
+	font-size: 30px;
+}
+
+/*Utility Finder*/
