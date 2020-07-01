@@ -46,19 +46,25 @@ h1 {
 	text-align: center;
 }
 
-li {
-	display: inline-block;
-}
 
 form hr {
-  width: 15%;
+	width: 15%;
 }
 
 form {
-  text-align: center;
-  line-height: 30px;
-  height: 80%;
-  overflow: auto;
+	text-align: center;
+	line-height: 30px;
+	height: 80%;
+	overflow: auto;
+}
+
+#abouttext {
+	width: 900px;
+	margin: 0 auto;
+}
+
+#abouttext hr {
+	width: 900px;
 }
 
 
@@ -85,7 +91,13 @@ form {
   	border: 2px solid white;
 }
 
+.internallinks a {
+	text-align: center;
+}
+
 .internallinks {
+	margin: auto;
+	width: 50%;
 	text-align: center;
 }
 
