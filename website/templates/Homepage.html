@@ -14,14 +14,13 @@
 	  <a href="./search" class="navigation">Interactive Map</a>
 	</div>
 	<h1 class="homeheader">Home Page</h1>
-	<nav>
-		<div class='internallinks'>
+	<nav class='internallinks'>
 			<a href="#about">About the Project</a>
 			<a href="#meet">Meet the Team</a>
 			<a href="#sponsor">Sponsors</a>
-		<div>
 	</nav>
 	<div id="abouttext">
+		<br>
 		<hr>
 		<h3><a name="about">About the Project:</a></h3>
 		<p class='first'>Hello! Thank you for visiting our website. Created by a motivated team from Duke University’s summer research program, Data+, we are excited to be providing useful information to North Carolina residents. Our team is composed of three undergraduate interns, Ben Williams, Peyton Cox, and Roy Wang. The three have a passion for the intersection of data science and sustainability. They are led by Evan Wyse, a statistics graduate student with years of data science industry experience.</p>
@@ -54,10 +53,12 @@
 	</div>
 	</body>
 	<footer>
+		<div id="abouttext"
 		<h3><a name="sponsor">Sponsors:</a></h3>
 		<ul class="endtag">
-			<li><img src="{{ url_for('static', filename='img/iow.jpg') }}"></li>
-			<li><img src="{{ url_for('static', filename='img/duke.png') }}"></li>
+			<img src="{{ url_for('static', filename='img/iow.jpg') }}">
+			<img src="{{ url_for('static', filename='img/duke.png') }}">
 		</ul>
+		</div>
 	</footer>
 	</html>
