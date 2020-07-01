@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 	<html>
-	<nav>
+	<div class="topnav">
+		<a href="https://internetofwater.org/"><img src="{{ url_for('static', filename='img/iow.jpg') }}"></a>
 		<a href="/">Home</a>
 		<a href="./utilityfinder">Utility Finder</a>
-		<a>Interactive Map</a>
-	</nav>
+		<a href="./search">Interactive Map</a>
+	</div>
 	<head>
 		<script src='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js'></script>
 		<link href='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css' rel='stylesheet' />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap"/>
+		<link href="{{ url_for('static', filename='stylesheets/style.css') }}" rel="stylesheet" type="text/css"/>
 		<title>Data+ Utility Finder Homepage</title>
 	</head>
 	<body>
