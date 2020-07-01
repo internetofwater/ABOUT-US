@@ -16,10 +16,10 @@
 		</header>
 	-->
 	<div class="topnav">
-	  <a href="https://internetofwater.org/"><img src="{{ url_for('static', filename='img/iow.jpg') }}"></a>
-	  <a href="/">Home</a>
-	  <a href="./utilityfinder">Utility Finder</a>
-	  <a href="./search">Interactive Map</a>
+	  <a href="https://internetofwater.org/" class="iow" target="_blank"><img src="{{ url_for('static', filename='img/iow.jpg') }}"></a>
+	  <a href="/" class="navigation">Home</a>
+	  <a href="./utilityfinder" class="navigation">Utility Finder</a>
+	  <a href="./search" class="navigation">Interactive Map</a>
 	</div>
 		<section id="overlay">
 			<h1 id="utfindertitle">Utility Finder</h1>
@@ -27,12 +27,12 @@
 			<form action="search" method="POST">
 				<section class="addressinput">
 					<label for="address">Enter Your Street Address</label><br>
-					<input type="text" name="address" id="address" placeholder="e.g. 1234 Main Avenue" required>
+					<input type="text" name="address" id="address" placeholder="e.g. 1234 Main Avenue" size="25">
 				</section>
 				<hr>
 	            <section class="zipinput">
 					<label for="zipcode">Enter Your Zip Code</label><br>
-					<input type="number" name="zipcode" id="zipcode" placeholder="e.g. 34670 for Oakland, FL" required>
+					<input type="number" name="zipcode" id="zipcode" placeholder="e.g. 34670" size="10" required>
 				</section>
 				<hr>
 	            <section class="stateinput">
