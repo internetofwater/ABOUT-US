@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 	<html>
-	<div class="topnav">
-		<a href="https://internetofwater.org/"><img src="{{ url_for('static', filename='img/iow.jpg') }}"></a>
-		<a href="/">Home</a>
-		<a href="./utilityfinder">Utility Finder</a>
-		<a href="./search">Interactive Map</a>
-	</div>
+	
 	<head>
 		<script src='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js'></script>
 		<link href='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css' rel='stylesheet' />
@@ -13,11 +8,18 @@
       	<link rel="stylesheet" href="/node_modules/dygraphs/dist/dygraph.css"/>
       	<link href="{{ url_for('static', filename='stylesheets/style.css') }}" rel="stylesheet" type="text/css"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap"/>
+		<link rel="icon" href="https://internetofwater.org/wp-content/uploads/2018/11/cropped-iow_favicon-32x32.png" sizes="32x32">
 		<!--<script src="//cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.css" /> -->
 		<title>Data+ Utility Finder Homepage</title>
 	</head>
 	<body>
+	<div class="topnav">
+	  <a href="https://internetofwater.org/" class="iow" target="_blank"><img src="{{ url_for('static', filename='img/iow.jpg') }}"></a>
+	  <a href="/" class="navigation">Home</a>
+	  <a href="./utilityfinder" class="navigation">Utility Finder</a>
+	  <a href="./search" class="navigation">Interactive Map</a>
+	</div>
 	<h1>Result</h1>
 	<p>{% if gran == 'zipcode_level' %}
 		"Warning: Address was unreadable so using zipcode to display utilities"
