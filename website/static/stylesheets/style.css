@@ -38,7 +38,7 @@ h1 {
 .undergraduates {
 	display: grid;
 	grid-gap: 20px;
-	grid-template-columns: 150px 300px 271px;
+	grid-template-columns: 14% 24% 24% 24% 14%;
 	justify-content: center;
 	align-content: center;
 }
@@ -46,7 +46,9 @@ h1 {
 .profile img{
 	height: 200px;
 	width: auto;
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5);
 }
+
 
 .caption {
 	text-align: center;
@@ -63,6 +65,26 @@ li {
 	display: inline-block;
 }
 
+.a{
+	grid-column-start: 2;
+  	grid-column-end: 3;
+  	text-align: center;
+  }
+
+.b{
+	grid-column-start: 3;
+  	grid-column-end: 4;
+  	text-align: center;
+  }
+
+
+.c{
+	grid-column-start: 4;
+  	grid-column-end: 5;
+  	text-align: center;
+  }
+
+
 .d{
 	grid-column-start: 2;
   	grid-column-end: 3;
@@ -73,7 +95,6 @@ li {
 	text-align: center;
 }
 
-.cornerlogo img {
-	width: 150px;
-	height: auto;
+.endtag {
+	display: inline-block;
 }

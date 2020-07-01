@@ -5,14 +5,14 @@
 		<link href="{{ url_for('static', filename='stylesheets/style.css') }}" rel="stylesheet" type="text/css"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap"/>
 	</head>
-	<div class="cornerlogo">
-		<img src="{{ url_for('static', filename='img/iow.jpg') }}">
+	<div>
+		<ul class="cornerlogo">
+			<!--<li><img src="{{ url_for('static', filename='img/iow.jpg') }}"></li>-->
+			<li><a class= 'top_corner a' href="/">Home</a></li>
+			<li><a class= 'top_corner b' href="./utilityfinder">Utility Finder</a></li>
+			<li><a class= 'top_corner c' href="./search">Interactive Map</a></li>
+		</ul>
 	</div>
-	<nav>
-		<a class= 'top_corner a' href="/">Home</a>
-		<a class= 'top_corner b' href="./utilityfinder">Utility Finder</a>
-		<a class= 'top_corner c' href="./search">Interactive Map</a>
-	</nav>
 	<body>
 	<div>
 	<h1 class="homeheader">Home Page</h1>
@@ -52,4 +52,10 @@
 		</div>
 	</div>
 	</body>
+	<footer>
+		<ul class="endtag">
+			<li><img src="{{ url_for('static', filename='img/iow.jpg') }}"></li>
+			<li><img src="{{ url_for('static', filename='img/duke.png') }}"></li>
+		</ul>
+	</footer>
 	</html>
