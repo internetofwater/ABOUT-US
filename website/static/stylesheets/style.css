@@ -170,6 +170,15 @@ form {
 	display: inline-block;
 }
 
+#sponsorimage {
+	width: 900px;
+	margin: 0 auto;
+}
+
+#sponserimage hr {
+	width: 900px;
+}
+
 /*Utility Finder*/
 
 #overlay {
