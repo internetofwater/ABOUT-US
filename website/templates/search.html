@@ -1,11 +1,5 @@
 <!DOCTYPE html>
 	<html>
-	<div class="topnav">
-		<a href="https://internetofwater.org/"><img src="{{ url_for('static', filename='img/iow.jpg') }}"></a>
-		<a href="/">Home</a>
-		<a href="./utilityfinder">Utility Finder</a>
-		<a href="./search">Interactive Map</a>
-	</div>
 	<head>
 		<script src='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js'></script>
 		<link href='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css' rel='stylesheet' />
@@ -18,30 +12,41 @@
 		<title>Data+ Utility Finder Homepage</title>
 	</head>
 	<body>
+	<div class="topnav">
+	  <a href="https://internetofwater.org/" class="iow" target="_blank"><img src="{{ url_for('static', filename='img/iow.jpg') }}"></a>
+	  <a href="/" class="navigation">Home</a>
+	  <a href="./utilityfinder" class="navigation">Utility Finder</a>
+	  <a href="./search" class="navigation">Interactive Map</a>
+	</div>
 	<h1>Result</h1>
-	<p>{% if gran == 'zipcode_level' %}
-		"Warning: Address was unreadable so using zipcode to display utilities"
-		{% endif %}
-	</p>
-	<br><br>
-	<p>{% if uname == 'None' %}
-		"Warning: No utility for your area to display"
-		{% endif %}
-	</p>
-	<p>Address is: {{ad}}, Zipcode is: {{zipc}}, State is: {{st}}</p>
-	<br><br>
-	<p>Latitude is: {{lat}}, Longitude is {{lon}} </p>
-	<br><br>
-	<p>Utility is: {{uname}}</p><br>
-	<p>Conservation plan information: <a href={{linkname}} target="_blank">{{linkname}}</a> </p>
+	<div id="interface">
+		<section id="reporting">
+			<p>{% if gran == 'zipcode_level' %}
+				"Warning: Address was unreadable so using zipcode to display utilities"
+				{% endif %}
+			</p>
+			<br>
+			<p>{% if uname == 'None' %}
+				"Warning: No utility for your area to display"
+				{% endif %}
+			</p>
+			<p>Address is: {{ad}}, Zipcode is: {{zipc}}, State is: {{st}}</p>
+			<br>
+			<p>Latitude is: {{lat}}, Longitude is {{lon}} </p>
+			<br>
+			<p>Utility is: {{uname}}</p><br>
+			<p>Conservation plan information: <a href={{linkname}} target="_blank">{{linkname}}</a> </p>
+		</section>
 
-	<iframe src="map?lat={{lat}}&lon={{lon}}" style='width: 1500px; height: 800px;'></iframe>
-	<!-- <div>
-		<div id='map2' style='float: left; width: 800px; height: 500px;'></div>
-		<div id="bigdiv" style="display: block;">
-			<div id="graphdiv" style="float: right; width:600px; height:500px;"></div>
-		</div>
-	</div> -->
+		<iframe src="map?lat={{lat}}&lon={{lon}}" id="mapfigure"></iframe>
+		<!-- <div>
+			<div id='map2' style='float: left; width: 800px; height: 500px;'></div>
+			<div id="bigdiv" style="display: block;">
+				<div id="graphdiv" style="float: right; width:600px; height:500px;"></div>
+			</div>
+		</div> -->
+		<div id="graphdiv"></div>
+	</div>
 	<script type="text/javascript">
 		var x = document.getElementById("graphdiv")
 		//x.style.display = "none";
@@ -65,7 +70,7 @@
 	g = new Dygraph(
 
       // containing div
-      x,
+      document.getElementById("graphdiv"),
 
       // CSV or path to a CSV file.
       data,
@@ -75,7 +80,7 @@
         legend: 'always'
       }
 		  );
-
+/*
 		mapboxgl.accessToken = 'pk.eyJ1IjoiYnR3MTkiLCJhIjoiY2tiOGR6MzI1MDNjaTJ0c3hnZHBmODRneSJ9.QVj1xKQ--FUvtw6soygk9g';
 		var map = new mapboxgl.Map({
 			container: 'map2',
@@ -225,7 +230,7 @@
             map.getCanvas().style.cursor = '';
         });
 	});
-
+*/
 
 	</script>
 	</body>
