@@ -28,6 +28,7 @@ import lxml.html as lh
 
 app = Flask(__name__, static_url_path='')
 app.static_folder = 'static'
+app.run(host='67.159.92.20')
 
 @app.route('/')
 def home_page():
