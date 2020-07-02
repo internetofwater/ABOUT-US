@@ -164,8 +164,8 @@ map.loadImage(
 'https://upload.wikimedia.org/wikipedia/commons/a/aa/Home_icon_grey.png',
 function(error, image) {
 if (error) throw error;
-map.addImage('cat', image);
-map.addSource('point', {
+map.addImage('house', image);
+map.addSource('house', {
 'type': 'geojson',
 'data': {
 'type': 'FeatureCollection',
@@ -181,11 +181,11 @@ map.addSource('point', {
 }
 });
 map.addLayer({
-'id': 'points',
+'id': 'house',
 'type': 'symbol',
-'source': 'point',
+'source': 'house',
 'layout': {
-'icon-image': 'home-15',
+'icon-image': 'house',
 'icon-size': 0.1
 }
 });
