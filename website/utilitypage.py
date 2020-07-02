@@ -33,6 +33,10 @@ app.static_folder = 'static'
 def home_page():
     return render_template('Homepage.html')
 
+@app.route('/about_us')
+def aboutteam():
+    return render_template('about_us.html')
+
 @app.route('/utilityfinder')
 def utiltyfinder():
     return render_template('utilityfinder.html')

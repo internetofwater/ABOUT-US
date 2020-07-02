@@ -10,50 +10,27 @@
 	<div class="topnav">
 	  <a href="https://internetofwater.org/" class="iow" target="_blank"><img src="{{ url_for('static', filename='img/iow.jpg') }}"></a>
 	  <a href="/" class="navigation">Home</a>
+	  <a href="./about_us" class="navigation">About Us</a>
 	  <a href="./utilityfinder" class="navigation">Utility Finder</a>
 	  <a href="./search" class="navigation">Interactive Map</a>
 	</div>
 	<h1 class="homeheader">Home Page</h1>
 	<nav class='internallinks'>
 			<a href="#about">About the Project</a>
-			<a href="#meet">Meet the Team</a>
 			<a href="#sponsor">Sponsors</a>
 	</nav>
 	<div id="abouttext">
 		<br>
 		<hr>
-		<h3><a name="about">About the Project:</a></h3>
-		<p class='first'>Hello! Thank you for visiting our website. Created by a motivated team from Duke University’s summer research program, Data+, we are excited to be providing useful information to North Carolina residents. Our team is composed of three undergraduate interns, Ben Williams, Peyton Cox, and Roy Wang. The three have a passion for the intersection of data science and sustainability. They are led by Evan Wyse, a statistics graduate student with years of data science industry experience.</p>
-		<p>Our client, the Triangle Water Supply Partnership, noticed a lack of reliable and up-to-date information about water conditions and corresponding water conservation plans. They tasked us with creating a useful tool for both utility companies in North Carolina and their respective users.</p>
+		<h2><a name="about">About the Project:</a></h2>
+		<p class='first'>Our client, the Triangle Water Supply Partnership, noticed a lack of reliable and up-to-date information about water conditions and corresponding water conservation plans. They tasked us with creating a useful tool for both utility companies in North Carolina and their respective users.</p>
 		<p>Back in 2014, the Flint Michigan water crisis became a major story in the national news. After the city decided to switch from Detroit’s water system to the Flint River in an effort to save money, many residents were met with frightening orangish water. The water contained amounts of chlorine and lead way beyond federal standards. Flint Michigan is a good example of the necessity of accountable utilities companies and public information.</p>
 		<p>In Flint, the city was able to ignore the citizens’ complaints until national pressure increased. We hope to prevent future acts of injustice even if on a much smaller scale because water is a right. When environmental injustices occur, they disproportionately affect the most vulnerable populations and so accountability is key.</p>
 		<p>We are happy to have witnessed the successful launch of our website and hope it contributes to informed decision making. We would like to thank everyone who helped with the initial creation and eventual success of this project.</p>
-		<hr>
-		<h3><a name="meet">Meet the Team:</a></h3>
-	</div>
-	<main class="undergraduates">
-		<div class="profile a">
-			<img src = "{{ url_for('static', filename='img/ben.jpeg') }}" >
-			<p class="caption">Ben Williams</p>
-		</div>
-		<div class="profile b">
-			<img src = "{{ url_for('static', filename='img/peyton.jpeg') }}" >
-			<p class="caption">Peyton Cox</p>
-		</div>
-		<div class="profile c">
-			<img src = "{{ url_for('static', filename='img/roy.jpg') }}">
-			<p class="caption">Roy Wang</p>
-		</div>
-	</main>
-	<div class="leader">
-		<div class="profile d">
-			<img src= "{{ url_for('static', filename='img/evan.jpg') }}">
-			<p class= "caption">Evan Wyse</p>
-		</div>
 	</div>
 	<div id="sponsorimage">
 		<hr>
-		<h3><a name="sponsor">Sponsors:</a></h3>
+		<h2><a name="sponsor">Sponsors:</a></h2>
 		<div class="endtag">
 			<img src="{{ url_for('static', filename='img/iow.jpg') }}">
 			<img src="{{ url_for('static', filename='img/duke.png') }}">

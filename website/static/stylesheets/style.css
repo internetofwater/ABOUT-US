@@ -46,7 +46,6 @@ h1 {
 	text-align: center;
 }
 
-
 form hr {
 	width: 15%;
 }
@@ -57,17 +56,6 @@ form {
 	height: 80%;
 	overflow: auto;
 }
-
-#abouttext {
-	width: 900px;
-	margin: 0 auto;
-}
-
-#abouttext hr {
-	width: 900px;
-}
-
-
 
 .top_corner:hover {
   	background-color: #008CBA;
@@ -110,12 +98,55 @@ form {
 	text-align: center;
 }
 
-.undergraduates {
-	display: grid;
-	grid-gap: 20px;
-	grid-template-columns: 14% 24% 24% 24% 14%;
-	justify-content: center;
-	align-content: center;
+.homeheader {
+	text-align: center;
+}
+
+#abouttext {
+	width: 900px;
+	margin: 0 auto;
+}
+
+#abouttext hr {
+	width: 900px;
+}
+
+.endtag {
+	display: inline-block;
+}
+
+#sponsorimage {
+	width: 900px;
+	margin: 0 auto;
+}
+
+#sponserimage hr {
+	width: 900px;
+}
+
+
+
+
+/*About Us*/
+
+
+
+
+h1 {
+	font-weight: 800;
+	text-align: center;
+}
+
+.positiontitle {
+	color: white;
+}
+
+p {
+	color: #f2f2f2;
+}
+
+.homeheader {
+	text-align: center;
 }
 
 .profile img{
@@ -124,9 +155,17 @@ form {
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5);
 }
 
-
 .caption {
 	text-align: center;
+}
+
+.undergraduates {
+	display: grid;
+	grid-gap: 20px;
+	max-width: 1300px;
+	grid-template-columns: 14% 24% 24% 24% 14%;
+	justify-content: center;
+	align-content: center;
 }
 
 .leader {
@@ -155,29 +194,71 @@ form {
   	text-align: center;
   }
 
-
 .d{
 	grid-column-start: 2;
   	grid-column-end: 3;
   	text-align: center;
   }
 
-.homeheader {
-	text-align: center;
-}
-
-.endtag {
-	display: inline-block;
-}
-
-#sponsorimage {
-	width: 900px;
+#paragraph {
+	width: 902px;
 	margin: 0 auto;
 }
 
-#sponserimage hr {
-	width: 900px;
+#paragraph hr {
+	width: 902px;
 }
+/*
+.undergraduates {
+    max-width:960px;
+    text-align:center;
+}
+
+
+.profile {
+   position: relative;
+   display: inline-block;
+   padding:10px;
+   left:50%;
+   justify-content: center;
+}
+
+
+/*
+
+.undergraduates {
+	display: grid;
+	grid-gap: 20px;
+	grid-template-columns: 14% 24% 24% 24% 14%;
+	justify-content: center;
+	align-content: center;
+}
+
+.undergraduates {
+	display: grid;
+	grid-gap: 20px;
+	grid-template-columns: 14% 24% 24% 24% 14%;
+	justify-content: center;
+}
+
+.leader {
+	align-content: center;
+	width: 100%;
+	display: grid;
+    grid-template-columns: 25% 50% 25%;
+}
+
+#paragraph {
+	width: 902px;
+	margin: 0 auto;
+}
+
+#paragraph hr {
+	width: 902px;
+}
+
+*/
+
 
 /*Utility Finder*/
 
