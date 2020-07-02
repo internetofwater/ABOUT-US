@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 	<html>
 	<head>
-       <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js"></script>
-       <link
-       href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css"
-       rel="stylesheet"/>
-    <script src='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css' rel='stylesheet' />
-    <script src="/node_modules/dygraphs/dist/dygraph.js"></script>
+       	<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js"></script>
+       	<link
+       	href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css"
+       	rel="stylesheet"/>
+    	<script src='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js'></script>
+    	<link href='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css' rel='stylesheet' />
+    	<script src="/node_modules/dygraphs/dist/dygraph.js"></script>
         <link rel="stylesheet" href="/node_modules/dygraphs/dist/dygraph.css"/>
         <link href="{{ url_for('static', filename='stylesheets/style.css') }}" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap"/>
+    	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap"/>
+    	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<!--<script src="//cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.css" /> -->
 		<title>Data+ Utility Finder Homepage</title>
@@ -18,7 +19,7 @@
 	<body>
 	<div class="topnav">
 	  <a href="https://internetofwater.org/" class="iow" target="_blank"><img src="{{ url_for('static', filename='img/iow.jpg') }}"></a>
-	  <a href="/" class="navigation">Home</a>
+	  <a href="/" class="navigation fa fa-home"></a>
 	  <a href="./about_us" class="navigation">About Us</a>
 	  <a href="./utilityfinder" class="navigation">Utility Finder</a>
 	  <a href="./search" class="navigation">Interactive Map</a>

@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 	<html>
-	<div class="topnav">
-	  	<a href="https://internetofwater.org/" class="iow" target="_blank"><img src="{{ url_for('static', filename='img/iow.jpg') }}"></a>
-		<a href="/" class="navigation">Home</a>
-		<a href="./about_us" class="navigation">About Us</a>
-		<a href="./utilityfinder" class="navigation">Utility Finder</a>
-		<a href="./search" class="navigation">Interactive Map</a>
-	</div>
 	<head>
 		<script src='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js'></script>
 		<link href='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css' rel='stylesheet' />
 		<link href="{{ url_for('static', filename='stylesheets/style.css') }}" rel="stylesheet" type="text/css"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<title>Data+ Utility Finder Homepage</title>
 	</head>
 	<body>
+	<div class="topnav">
+	  	<a href="https://internetofwater.org/" class="iow" target="_blank"><img src="{{ url_for('static', filename='img/iow.jpg') }}"></a>
+		<a href="/" class="navigation fa fa-home"></a>
+		<a href="./about_us" class="navigation">About Us</a>
+		<a href="./utilityfinder" class="navigation">Utility Finder</a>
+		<a href="./search" class="navigation">Interactive Map</a>
+	</div>
 		<p>Error<p>
 		<h1>Result</h1>
 		<p>Address is: {{ad}}, Zipcode is: {{zipc}}, State is: {{st}}, Address provided was unclear please try re-entering <a href="./utilityfinder">Utility Finder</a></p>
