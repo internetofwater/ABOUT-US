@@ -40,44 +40,19 @@ body {
   color: white;
 }
 
+
+
+
 /*Homepage*/
+
+
+
+
 h1 {
 	font-weight: 800;
 	text-align: center;
 }
 
-form hr {
-	width: 15%;
-}
-
-form {
-	text-align: center;
-	line-height: 30px;
-	height: 80%;
-	overflow: auto;
-}
-
-.top_corner:hover {
-  	background-color: #008CBA;
-  	color: white;
-}
-
-.top_corner {
-	text-align: center;
-  	border: none;
-  	color: white;
-  	padding: 10px 25px;
-  	text-align: center;
-  	text-decoration: none;
-  	display: inline-block;
-  	font-size: 16px;
-  	margin: 4px 2px;
-  	transition-duration: 0.4s;
-  	cursor: pointer;
-  	background-color: white; 
-  	color: black; 
-  	border: 2px solid white;
-}
 
 .internallinks a {
 	text-align: center;
@@ -137,12 +112,8 @@ h1 {
 	text-align: center;
 }
 
-.positiontitle {
+h3.positiontitle {
 	color: white;
-}
-
-p {
-	color: #f2f2f2;
 }
 
 .homeheader {
@@ -200,67 +171,33 @@ p {
   	text-align: center;
   }
 
-#paragraph {
+.paragraph {
 	width: 902px;
 	margin: 0 auto;
 }
 
-#paragraph hr {
-	width: 902px;
-}
-/*
-.undergraduates {
-    max-width:960px;
-    text-align:center;
-}
-
-
-.profile {
-   position: relative;
-   display: inline-block;
-   padding:10px;
-   left:50%;
-   justify-content: center;
-}
-
-
-/*
-
-.undergraduates {
-	display: grid;
-	grid-gap: 20px;
-	grid-template-columns: 14% 24% 24% 24% 14%;
-	justify-content: center;
-	align-content: center;
-}
-
-.undergraduates {
-	display: grid;
-	grid-gap: 20px;
-	grid-template-columns: 14% 24% 24% 24% 14%;
-	justify-content: center;
-}
-
-.leader {
-	align-content: center;
-	width: 100%;
-	display: grid;
-    grid-template-columns: 25% 50% 25%;
-}
-
-#paragraph {
-	width: 902px;
-	margin: 0 auto;
-}
-
-#paragraph hr {
+.paragraph hr {
 	width: 902px;
 }
 
-*/
+
 
 
 /*Utility Finder*/
+
+
+
+
+form hr {
+	width: 15%;
+}
+
+form {
+	text-align: center;
+	line-height: 30px;
+	height: 80%;
+	overflow: auto;
+}
 
 #overlay {
   width: 35%;
