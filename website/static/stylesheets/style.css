@@ -90,20 +90,15 @@ h1 {
 	width: 900px;
 }
 
-.endtag {
-	display: inline-block;
+.sponsor {
+	width: auto;
+	height: 150px;
 }
 
 #sponsorimage {
 	width: 900px;
 	margin: 0 auto;
 }
-
-#sponserimage hr {
-	width: 900px;
-}
-
-
 
 
 /*About Us*/
