@@ -28,15 +28,15 @@
 	<div id="interface">
 		<section id="reporting">
 			<p>{% if gran == 'zipcode_level' %}
-				"Warning: Address was unreadable so using zipcode to display utilities"
+				Warning: Address was unreadable so using zipcode to display utilities
 				{% endif %}
 			</p>
 			<br>
 			<p>{% if uname == 'None' %}
-				"Warning: No utility for your area to display"
+				Warning: No utility for your area to display
 				{% endif %}
 			</p>
-			<p>Address is: {{ad}}, Zipcode is: {{zipc}}, State is: {{st}}</p>
+			<p>Address is: {{ad}}, Zipcode is: {{zipc}}, State is: {{st}}, Granularity is : {{gran}}</p>
 			<br>
 			<p>Latitude is: {{lat}}, Longitude is {{lon}} </p>
 			<br>

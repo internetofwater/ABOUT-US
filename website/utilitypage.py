@@ -55,14 +55,17 @@ def search():
         zipcode = request.form["zipcode"]
         state = request.form["state"]
         latitude, longitude, granularity = geocode_real(address, zipcode, state)
-        latitude, longitude, granularity = geocode_zip(zipcode, state)
         if latitude == 0 and longitude ==0:
-            return render_template("error_page.html", ad=address, zipc=zipcode, st=state)
+            try:
+                latitude, longitude, granularity = geocode_zip(zipcode, state)
+            except: 
+                return render_template("error_page.html", ad=address, zipc=zipcode, st=state)
         utility = correct_utility_function(latitude, longitude)
         (utility3, link2) = utility
         return render_template("search.html", lat=latitude, lon=longitude, gran= granularity, ad=address, zipc=zipcode, st=state, uname=utility3, linkname=link2)
-    else:
+    elif request.method == "GET":
         return render_template("interactive_map.html")
+
 
 @app.route('/nwis_data/<path:site_no>',methods=['GET'])
 def send_data(site_no):
@@ -87,27 +90,26 @@ def geocode_real (address, zipcode, state):  #geocoder address to coordinates
     lista.append(address)
     lista.append(zipcode)
     lista.append(state)
-    addressfull = ', '.join(lista)
+    addressfull = ' '.join(lista)
     try: 
         location = locator.geocode(addressfull)
-        if location is None:
-            return geocode_zip (zipcode, state)
-        else:     
+        if address == "":
+            return location.latitude, location.longitude, "zipcode_level"
+        else:
             return location.latitude, location.longitude, "address_level"
     except:
-        return 0,0, "failure" 
-
+        return 0, 0, "failure"
 
 def geocode_zip (zipcode, state):
     listb = []
     listb.append(zipcode)
     listb.append(state)
-    halfaddress = ', '.join(listb)
+    halfaddress = ' '.join(listb)
     try:
         zip_middle = locator.geocode(halfaddress)
         return zip_middle.latitude, zip_middle.longitude, "zipcode_level"
     except:
-        return 0,0, "failure"
+        return 0, 0, "failure"
 
 
 hostname = 'rapid-1304.vm.duke.edu'
