@@ -228,7 +228,7 @@ input[type=number] {
   width: 90%;
   display: grid;
   grid-template-columns: 40% 60%;
-  grid-template-rows: 350px 350px;
+  grid-template-rows: 370px 330px;
   margin: 0px auto 50px;
   grid-gap: 5px 5px;
   margin-top: 20px;
@@ -244,6 +244,10 @@ input[type=number] {
 	width: 450px;
 	height: auto;
 	margin: auto;
+}
+
+.warning {
+	font-size: 11px;
 }
 
 #plan_link {

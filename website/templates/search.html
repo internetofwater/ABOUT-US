@@ -31,10 +31,10 @@
       <h3 style="text-align: center">Results</h3>
       <div id="report_text">
   			{% if gran == 'zipcode_level' %}
-  			<p>Warning: Address was unreadable so using zipcode to display utilities</p>
+  			<p class="warning"><strong>Warning: Address was unreadable so using zipcode to display utilities</strong></p>
   			{% endif %}
   			{% if uname == 'None' %}
-  			<p>Warning: No utility for your area to display</p>
+  			<p class="warning"><strong>Warning: No utility for your area to display</strong></p>
   			{% endif %}
         {% if ad == '' %}
         <p>No Address Given</p>
@@ -46,7 +46,12 @@
         <!--Granularity is : {{gran}}</p>-->
   			<p>Latitude is {{lat}}</p>
         <p>Longitude is {{lon}} </p>
-  			<p>Utility is City of {{uname}}</p>
+        {% if uname == 'None' %}
+  			<p>No Utility/Well Water</p>
+        {% else %}
+        <p>Utility is {{uname}}</p>
+        {% endif %}
+
   			<p><strong>Follow this link to get conservation plan information</strong></p>
         <div id="plan_link"><a href={{linkname}} target="_blank">{{linkname}}</a></div>
       </div>
@@ -98,7 +103,7 @@
 			container: 'mapfigure',
 			style: 'mapbox://styles/btw19/ckb9tgy821c6j1itda2ynmftu', // stylesheet location
 			center: [{{lon}}, {{lat}}], // starting position [lng, lat]
-			zoom: 7.5 // starting zoom
+			zoom: 12 // starting zoom
 		});
 
     map.addControl(new mapboxgl.NavigationControl());
