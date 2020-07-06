@@ -12,6 +12,7 @@
         <link href="{{ url_for('static', filename='stylesheets/style.css') }}" rel="stylesheet" type="text/css"/>
     	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap"/>
     	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="icon" href="https://internetofwater.org/wp-content/uploads/2018/11/cropped-iow_favicon-32x32.png" sizes="32x32">
 		<!--<script src="//cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.css" /> -->
 		<title>Data+ Utility Finder Homepage</title>
@@ -28,20 +29,27 @@
 	<div id="interface">
 		<section id="reporting">
       <h3 style="text-align: center">Results</h3>
-			<p>{% if gran == 'zipcode_level' %}
-				Warning: Address was unreadable so using zipcode to display utilities
-				{% endif %}
-			</p>
-			<p>{% if uname == 'None' %}
-				Warning: No utility for your area to display
-				{% endif %}
-			</p>
-			<p>Address is: {{ad}}, Zipcode is: {{zipc}}, State is: {{st}}, Granularity is : {{gran}}</p>
-			<br>
-			<p>Latitude is: {{lat}}, Longitude is {{lon}} </p>
-			<br>
-			<p>Utility is: {{uname}}</p><br>
-			<p>Conservation plan information: <a href={{linkname}} target="_blank">{{linkname}}</a> </p>
+      <div id="report_text">
+  			{% if gran == 'zipcode_level' %}
+  			<p>Warning: Address was unreadable so using zipcode to display utilities</p>
+  			{% endif %}
+  			{% if uname == 'None' %}
+  			<p>Warning: No utility for your area to display</p>
+  			{% endif %}
+        {% if ad == '' %}
+        <p>No Address Given</p>
+        {% else %}
+        <p>Address is {{ad}}</p>
+        {% endif %}
+        <p>Zipcode is {{zipc}}</p>
+        <!--<p>State is {{st}}</p>-->
+        <!--Granularity is : {{gran}}</p>-->
+  			<p>Latitude is {{lat}}</p>
+        <p>Longitude is {{lon}} </p>
+  			<p>Utility is City of {{uname}}</p>
+  			<p><strong>Follow this link to get conservation plan information</strong></p>
+        <div id="plan_link"><a href={{linkname}} target="_blank">{{linkname}}</a></div>
+      </div>
 		</section>
 
 	<!-- 	<iframe src="map?lat={{lat}}&lon={{lon}}" id="mapfigure" style='float: left; width: 800px; height: 500px'></iframe> -->
@@ -93,6 +101,7 @@
 			zoom: 7.5 // starting zoom
 		});
 
+    map.addControl(new mapboxgl.NavigationControl());
 
 		map.on('load', function() {
         map.loadImage(
@@ -371,13 +380,15 @@
         ]
         }
         });
+
       map.addLayer({
                 'id': 'utilitiesicons',
                 'type': 'symbol',
                 'source': 'utilitiesicons',
                 'layout': {
-                    'icon-image': 'dam-15',
-                    'icon-allow-overlap': true
+                    'icon-image': 'watermill-15',
+                    'icon-allow-overlap': true,
+                    'icon-size': 1.5
                 }
             });
 

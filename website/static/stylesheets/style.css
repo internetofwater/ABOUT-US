@@ -125,44 +125,37 @@ h3.positiontitle {
 	text-align: center;
 }
 
-.undergraduates {
+.team {
 	display: grid;
 	grid-gap: 40px;
-	max-width: 1300px;
-	grid-template-columns: 14% 24% 24% 24% 14%;
+	max-width: 902px;
+	grid-template-columns: 200px 200px 200px 200px;
 	justify-content: center;
 	align-content: center;
 }
 
-.leader {
-	align-content: center;
-	width: 100%;
-	display: grid;
-    grid-template-columns: 25% 50% 25%;
-}
-
 .a{
-	grid-column-start: 2;
-  	grid-column-end: 3;
+	grid-column-start: 1;
+  	grid-column-end: 2;
   	text-align: center;
   }
 
 .b{
-	grid-column-start: 3;
-  	grid-column-end: 4;
+	grid-column-start: 2;
+  	grid-column-end: 3;
   	text-align: center;
   }
 
 
 .c{
-	grid-column-start: 4;
-  	grid-column-end: 5;
+	grid-column-start: 3;
+  	grid-column-end: 4;
   	text-align: center;
   }
 
 .d{
-	grid-column-start: 2;
-  	grid-column-end: 3;
+	grid-column-start: 4;
+  	grid-column-end: 5;
   	text-align: center;
   }
 
@@ -247,6 +240,19 @@ input[type=number] {
 	background-color: rgba(255, 255, 255, 0.9);
 }
 
+#report_text {
+	width: 450px;
+	height: auto;
+	margin: auto;
+}
+
+#plan_link {
+	width: 450px;
+	height: 45px;
+	border: 3px black solid;
+	padding: 5px;
+}
+
 #mapfigure {
 	float: right;
 	height: auto;
@@ -278,4 +284,5 @@ input[type=number] {
 	height: 40px;
 	width: 400px;
 	border: 2px black solid;
+	background-color: rgba(255, 255, 255, 0.9);
 }
