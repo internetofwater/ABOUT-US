@@ -277,7 +277,7 @@ input[type=number] {
 	border-radius: 5px;
 }
 
-#legend {
+#searchleg.legend {
 	grid-column: 2 / 3;
 	grid-row: 1 / 2;
 	z-index: 10;
@@ -289,4 +289,59 @@ input[type=number] {
 	width: 400px;
 	border: 2px black solid;
 	background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Interactive Map Page */
+
+#boxes1 {
+	background-image: linear-gradient(#333, lightblue);
+	grid-column: 1 / 2;
+	grid-row: 1 / 3;
+}
+
+#boxes1 p, h2, input{
+	color: white;
+}
+
+#boxes2 {
+	background-image: linear-gradient(#333, lightblue);
+	grid-column: 3 / 4;
+	grid-row: 1 / 3;
+}
+
+#interactivemap {
+	height: 400px;
+	width: 800px;
+	margin: 0 auto;
+	grid-column: 2 / 3;
+	grid-row: 1 / 2;
+}
+
+#interactivegraph {
+	height: 355px;
+	width: 800px;
+	background-color: rgba(255, 255, 255, 0.9);
+	margin: 0 auto;
+	grid-column: 2 / 3;
+	grid-row: 2 / 3;
+}
+
+#intleg.legend {
+	z-index: 10;
+	float: left;
+	position: absolute;
+	top: 55px;
+	left: 325px;
+	height: 40px;
+	width: 400px;
+	border: 2px black solid;
+	background-color: rgba(255, 255, 255, 0.9);
+}
+
+.holder {
+	height: 755px;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 320px 800px 320px;
+	grid-template-rows: 400px 355px;
 }
