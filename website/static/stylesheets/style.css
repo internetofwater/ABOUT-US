@@ -299,7 +299,15 @@ input[type=number] {
 	grid-row: 1 / 3;
 }
 
-#boxes1 p, h2, input, label{
+#boxes1 p{
+	color: white;
+}
+
+#boxes1 h2{
+	color: white;
+}
+
+#boxes1 label{
 	color: white;
 }
 
