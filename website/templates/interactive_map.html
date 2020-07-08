@@ -74,8 +74,8 @@
 		var map = new mapboxgl.Map({
 			container: 'interactivemap',
 			style: 'mapbox://styles/mapbox/light-v10', // stylesheet location
-			center: [-79.0193, 35.7596], // starting position [lng, lat]
-			zoom: 7.5 // starting zoom
+			center: [-79.8193, 35.7596], // starting position [lng, lat]
+			zoom: 6 // starting zoom
 		});
 
     	map.addControl(new mapboxgl.NavigationControl());
@@ -140,7 +140,7 @@
 
              'line-color': '#4EE91E',
 
-             'line-width':2
+             'line-width':1
             
 
           }
@@ -189,7 +189,7 @@
 
  map.addLayer({
 
-            'id': 'utilities-simpler-border-viz',
+          'id': 'utilities-simpler-border-viz',
 
             'source-layer': 'SimplePolygonsNC-bz1aui',
 
@@ -197,13 +197,16 @@
 
             'source': 'utilities-simpler',
 
-            'layout': {},
+            'minzoom': 7,
 
-            'minzoom': 10,
+            'maxzoom': 10,
 
             'paint': {
-              'line-color':'#4EE91E',
-             'line-width':2
+
+             'line-color': '#4EE91E',
+
+             'line-width':1
+            
 
           }
 
@@ -291,7 +294,8 @@
                 'layout': {
                     'icon-image': 'watermill-15',
                     'icon-allow-overlap': true,
-                    'icon-size': 1
+                    'icon-size': 1,
+                    'visibility': 'none'
                 }
             });
 
@@ -310,9 +314,10 @@
                 'source': 'canalicons',
                 'source-layer': 'canal_points-dig4zp',
                 'layout': {
-                    'icon-image': 'dam-15',
+                    'icon-image': 'windmill-15',
                     'icon-allow-overlap': true,
-                    'icon-size': 1
+                    'icon-size': 1,
+                    'visibility': 'none'
                 }
             });
 
@@ -333,7 +338,8 @@
                 'layout': {
                     'icon-image': 'aquarium-15',
                     'icon-allow-overlap': true,
-                    'icon-size': 1
+                    'icon-size': 1,
+                    'visibility': 'none'
                 }
             });
 
@@ -354,7 +360,8 @@
                 'layout': {
                     'icon-image': 'beach-15',
                     'icon-allow-overlap': true,
-                    'icon-size': 1
+                    'icon-size': 1,
+                    'visibility': 'none'
                 }
             });
 
@@ -375,7 +382,8 @@
                 'layout': {
                     'icon-image': 'waterfall-15',
                     'icon-allow-overlap': true,
-                    'icon-size': 1
+                    'icon-size': 1,
+                    'visibility': 'none'
                 }
             });
 
@@ -395,19 +403,17 @@
 			checkbox.className = 'active';
 			checkbox.textContent = id;
 			checkboxlabel.for = id;
-			checkboxlabel.textContent = " " + id;
+
+			var create_label = id.replace("icon", "");
+			var final_label= create_label.charAt(0).toUpperCase() + create_label.slice(1);
+			checkboxlabel.textContent = " " + final_label;
 			 
 			checkbox.onclick = function(e) {
 				var clickedLayer = this.textContent;
-				e.preventDefault();
+				//e.preventDefault();
 				e.stopPropagation();
 				 
 				var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
-				if (this.checked == true) {
-					this.checked = false;
-				} else {
-					this.checked = true;
-				}
 				// toggle layer visibility by changing the layout object's visibility property
 				if (visibility === 'visible') {
 					map.setLayoutProperty(clickedLayer, 'visibility', 'none');
