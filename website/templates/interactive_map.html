@@ -541,7 +541,7 @@ map.on('click', 'streamicons', function(e) {
         getJSON(`/nwis_surfacewater/${siteNumber}`, function(err, data) {
           console.log(data);
           var new_data = [];
-          var labels_list = ["date", "gage_max", "gage_min", "gage_mean"];
+          var labels_list = ["date", "gage_height_max", "gage_height_min", "gage_mean"];
           //console.log("stuff")
           /*
           for (i=0; i<data.data.length; i++) {
@@ -556,8 +556,8 @@ map.on('click', 'streamicons', function(e) {
             var new_date = data.date[k];
             var dt = new Date(new_date);
             new_data[k][0] = dt;
-            new_data[k][1] = data.gage_max[k];
-            new_data[k][2] = data.gage_min[k];
+            new_data[k][1] = data.gage_height_max[k];
+            new_data[k][2] = data.gage_height_min[k];
             new_data[k][3] = data.gage_mean[k];
             //labels_list.push(data[0][j]);
           }

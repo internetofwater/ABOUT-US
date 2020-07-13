@@ -90,7 +90,7 @@ def send_groundwater_data(site_no):
 @app.route('/nwis_surfacewater/<path:site_no>',methods=['GET'])
 def send_surfacewater_data(site_no):
     print(site_no);
-    query = """SELECT * FROM nwis.surfacewater_daily_site_2 WHERE site_number = '{}'""".format(site_no)
+    query = """SELECT * FROM nwis.surfacewater_daily_site_2 WHERE site_number = '{}' ORDER BY year, month, day""".format(site_no)
     data = pd.read_sql_query(query, cnx)# get site_data from sql 
     #data['date'] = pd.to_datetime(data['date']);
     #data['date'] = data['date'].dt.date;
