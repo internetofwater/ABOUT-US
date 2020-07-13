@@ -431,12 +431,48 @@
 		}
 
 
-        map.on('mouseenter', 'utilitiesicons', function() {
+        map.on('mouseenter', 'streamicons', function() {
             map.getCanvas().style.cursor = 'pointer';
         });
 
         // Change it back to a pointer when it leaves.
-        map.on('mouseleave', 'utilitiesicons', function() {
+        map.on('mouseleave', 'streamicons', function() {
+            map.getCanvas().style.cursor = '';
+        });
+
+        map.on('mouseenter', 'ditchicons', function() {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'ditchicons', function() {
+            map.getCanvas().style.cursor = '';
+        });
+
+        map.on('mouseenter', 'canalicons', function() {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'canalicons', function() {
+            map.getCanvas().style.cursor = '';
+        });
+
+        map.on('mouseenter', 'estuaryicons', function() {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'estuaryicons', function() {
+            map.getCanvas().style.cursor = '';
+        });
+
+        map.on('mouseenter', 'lakeicons', function() {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'lakeicons', function() {
             map.getCanvas().style.cursor = '';
         });
 
@@ -496,29 +532,40 @@
 
 
 
-map.on('click', 'utilitiesicons', function(e) {
+map.on('click', 'streamicons', function(e) {
             var coordinates = e.features[0].geometry.coordinates.slice();
             var description = e.features[0].properties.description;
-            var siteNumber = e.features[0].properties.siteNumber;
+            var siteNumber = e.features[0].properties.site_no;
+            var siteName = e.features[0].properties.station_nm;
 
-        getJSON(`/nwis_data/${siteNumber}`, function(err, data) {
-          new_data = [];
+        getJSON(`/nwis_surfacewater/${siteNumber}`, function(err, data) {
+          console.log(data);
+          var new_data = [];
+          var labels_list = ["date", "gage_max", "gage_min", "gage_mean"];
           //console.log("stuff")
+          /*
           for (i=0; i<data.data.length; i++) {
             data.data[i][0] = new Date(data.data[i][0]);
             //console.log("foo"); 
           }
-          for (var k = 0; k < data.data.length; k++) {
+          */
+          console.log(Object.keys(data.date).length);
+          console.log(data.date[0])
+          for (var k = 0; k < Object.keys(data.date).length; k++) {
             new_data[k] = [];
-              for (var j = 0; j < 2; j++) {
-                  new_data[k][j] = data.data[k][j];
-              }
+            var new_date = data.date[k];
+            var dt = new Date(new_date);
+            new_data[k][0] = dt;
+            new_data[k][1] = data.gage_max[k];
+            new_data[k][2] = data.gage_min[k];
+            new_data[k][3] = data.gage_mean[k];
+            //labels_list.push(data[0][j]);
           }
-          console.log(new_data);  
+          console.log(new_data); 
           g.updateOptions({
                   'file': new_data,
-                  'title': data.data[0][4],
-                  'labels': ["Date", data.data[0][2]]
+                  'title': siteName,
+                  'labels': labels_list
                   })
         });//console.log(result.rows[0]['signal'])});
       //document.getElementById("bigdiv").style.display = "inline-block";   
@@ -529,11 +576,12 @@ map.on('click', 'utilitiesicons', function(e) {
             while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
                 coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
             }
-
+            /*
             new mapboxgl.Popup()
                 .setLngLat(coordinates)
                 .setHTML(description)
                 .addTo(map);
+            */
         });
 
 

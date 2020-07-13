@@ -472,6 +472,7 @@ map.on('click', 'utilitiesicons', function(e) {
             var siteNumber = e.features[0].properties.siteNumber;
 
         getJSON(`/nwis_data/${siteNumber}`, function(err, data) {
+          console.log(data);
           new_data = [];
           //console.log("stuff")
           for (i=0; i<data.data.length; i++) {

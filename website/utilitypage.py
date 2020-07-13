@@ -77,7 +77,27 @@ ON a.nwis_site_no = b.nwis_site_no WHERE a.nwis_site_no = '{}'""".format(site_no
 
     return jsonify(**data.to_dict('split'))
 
-# use these when you need to create/alter tables. DO NOT allow them to be displayed/served on a webpage, or check them into git
+@app.route('/nwis_groundwater/<path:site_no>',methods=['GET'])
+def send_groundwater_data(site_no):
+    query = """SELECT * FROM nwis.groundwater_daily_site_2 WHERE site_number = '{}'""".format(site_no)
+    data = pd.read_sql_query(query, cnx)# get site_data from sql 
+
+    #data['ts'] = data['ts'].apply(lambda x: x.strftime("%Y-%m-%d") )
+    # {"dates": [1,2,3,4], "signal": [1,2,3,4]}
+
+    return jsonify(**data.to_dict('split'))
+
+@app.route('/nwis_surfacewater/<path:site_no>',methods=['GET'])
+def send_surfacewater_data(site_no):
+    print(site_no);
+    query = """SELECT * FROM nwis.surfacewater_daily_site_2 WHERE site_number = '{}'""".format(site_no)
+    data = pd.read_sql_query(query, cnx)# get site_data from sql 
+    #data['date'] = pd.to_datetime(data['date']);
+    #data['date'] = data['date'].dt.date;
+    #data['ts'] = data['ts'].apply(lambda x: x.strftime("%Y-%m-%d") )
+    # {"dates": [1,2,3,4], "signal": [1,2,3,4]}
+    print(data['date'][0])
+    return data.to_json();
 
 @app.route('/node_modules/<path:path>')
 def send_js(path):
