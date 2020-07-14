@@ -622,8 +622,8 @@ map.on('click', 'streamicons', function(e) {
             var siteName = e.features[0].properties.station_nm;
 
         getJSON(`/nwis_surfacewater/${siteNumber}`, function(err, data) {
-          console.log(data);
-          var new_data = [];
+          console.log("p1");
+          var new_data = new Array (Object.keys(data.date).length);
           var labels_list = ["date", "gage_height_max", "gage_height_min", "gage_mean"];
           //console.log("stuff")
           /*
@@ -636,7 +636,7 @@ map.on('click', 'streamicons', function(e) {
           //console.log(Object.keys(data.date).length);
           //console.log(data.date[0])
           for (var k = 0; k < Object.keys(data.date).length; k++) {
-            new_data[k] = [];
+            new_data[k] = new Array(4);
             var new_date = data.date[k];
             var dt = new Date(new_date);
             new_data[k][0] = dt;
@@ -645,7 +645,7 @@ map.on('click', 'streamicons', function(e) {
             new_data[k][3] = data.gage_mean[k];
             //labels_list.push(data[0][j]);
           }
-          console.log(new_data);
+          console.log("p2");
           dataless.style = 'visibility: hidden';
           frosted.style = 'visibility: hidden'; 
           if (new_data.length) {
