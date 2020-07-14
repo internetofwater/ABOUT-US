@@ -362,11 +362,26 @@ input[type=number] {
 }
 
 #dataless {
+	height: 100px;
 	color: black;
 	font-size: 30px;
 	text-align: center;
 	visibility: hidden;
 	z-index: 10;
+	grid-column: 2 / 3;
+	grid-row: 2 / 3;
+	position: relative;
+	top: 150px;
+}
+
+#frosted {
+	height: 355px;
+	width: 800px;
+	grid-column: 2 / 3;
+	grid-row: 2 / 3;
+	z-index: 9;
+	visibility: hidden;
+	background-color: rgba(255, 255, 255, 0.5);
 }
 
 #intleg.legend {

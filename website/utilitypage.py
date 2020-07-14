@@ -96,7 +96,7 @@ def send_surfacewater_data(site_no):
     #data['date'] = data['date'].dt.date;
     #data['ts'] = data['ts'].apply(lambda x: x.strftime("%Y-%m-%d") )
     # {"dates": [1,2,3,4], "signal": [1,2,3,4]}
-    print(data['date'][0])
+    #print(data['date'][0])
     return data.to_json();
 
 @app.route('/node_modules/<path:path>')

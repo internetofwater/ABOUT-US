@@ -38,9 +38,11 @@
 		<div id="boxes2">
 		</div>
     <div id="dataless">NO DATA</div>
+    <div id="frosted"></div>
 		<script type="text/javascript">
   		var x = document.getElementById("interactivegraph")
       var dataless = document.getElementById("dataless");
+      var frosted = document.getElementById("frosted");
   		//x.style.display = "none";
   		var getJSON = function(url, callback) {
   		    var xhr = new XMLHttpRequest();
@@ -78,7 +80,7 @@
 			container: 'interactivemap',
 			style: 'mapbox://styles/mapbox/light-v10', // stylesheet location
 			center: [-79.8193, 35.7596], // starting position [lng, lat]
-			zoom: 6 // starting zoom
+			zoom: 5.5 // starting zoom
 		});
 
     	map.addControl(new mapboxgl.NavigationControl());
@@ -563,7 +565,6 @@ map.on('click', 'streamicons', function(e) {
             var description = e.features[0].properties.description;
             var siteNumber = e.features[0].properties.site_no;
             var siteName = e.features[0].properties.station_nm;
-            dataless.style = 'visibility: hidden';
 
         getJSON(`/nwis_surfacewater/${siteNumber}`, function(err, data) {
           console.log(data);
@@ -577,8 +578,8 @@ map.on('click', 'streamicons', function(e) {
           }
           */
           if (data != null) {
-          console.log(Object.keys(data.date).length);
-          console.log(data.date[0])
+          //console.log(Object.keys(data.date).length);
+          //console.log(data.date[0])
           for (var k = 0; k < Object.keys(data.date).length; k++) {
             new_data[k] = [];
             var new_date = data.date[k];
@@ -589,17 +590,30 @@ map.on('click', 'streamicons', function(e) {
             new_data[k][3] = data.gage_mean[k];
             //labels_list.push(data[0][j]);
           }
-          console.log(new_data); 
-          g.updateOptions({
-                  'visibility': true,
+          console.log(new_data);
+          dataless.style = 'visibility: hidden';
+          frosted.style = 'visibility: hidden'; 
+          if (new_data.length) {
+            g.updateOptions({
+                  'visibility': [true, true, true],
                   'file': new_data,
                   'title': siteName,
                   'labels': labels_list
                   });
+          } else {
+              dataless.style = 'visibility: visible';
+              frosted.style = 'visibility: visible';
+              g.updateOptions({
+                'visibility': [false, false, false],
+                'title': siteName,
+                'labels': labels_list
+              });
+            }
         } else {
           dataless.style = 'visibility: visible';
+          frosted.style = 'visibility: visible';
           g.updateOptions({
-            'visibility': false,
+            'visibility': [false, false, false],
             'title': siteName,
             'labels': labels_list
           })
