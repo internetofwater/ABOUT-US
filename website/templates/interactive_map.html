@@ -27,6 +27,15 @@
 			<div id="boxes1">
 				<h2>Selector</h2>
 				<p>Choose which you'd like to show</p>
+        <div class='container'>
+          <ul class="ks-cboxtags" id="checklist_sites">
+            <li><input type="checkbox" id="lakeicons"><label for="lakeicons">Lakes</label></li>
+            <li><input type="checkbox" id="streamicons"><label for="streamicons">Streams</label></li>
+            <li><input type="checkbox" id="ditchicons" ><label for="ditchicons">Ditches</label></li>
+            <li><input type="checkbox" id="canalicons" ><label for="canalicons">Canals</label></li>
+            <li><input type="checkbox" id="estuaryicons" ><label for="estuaryicons">Estuaries</label></li>
+          </ul>
+        </div>
 			</div>
 			<div id='interactivemap'></div>
 			    <div class="legend" id="intleg">
@@ -395,13 +404,58 @@
 		// enumerate ids of the layers
 		var toggleableLayerIds = ['lakeicons', 'streamicons', 'ditchicons', 'canalicons', 'estuaryicons'];
 		 
+for (var i = 0; i < toggleableLayerIds.length; i++) {
+      var id = toggleableLayerIds[i];
+       
+      var checkbox = document.getElementById(id);
+      //var checkboxlabel = document.createElement('label');
+      //var node = document.createElement('li');
+      //var spacer = document.createElement('br');
+      checkbox.textContent = id;
+       
+      checkbox.onclick = function(e) {
+        var clickedLayer = this.textContent;
+        //e.preventDefault();
+        e.stopPropagation();
+         
+        var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+        // toggle layer visibility by changing the layout object's visibility property
+        if (visibility === 'visible') {
+          map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+          this.className = '';
+        } else {
+          this.className = 'active';
+          map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+          }
+      };
+       
+      //layers.appendChild(spacer);
+    }
+
+    var clickability = function(e) {
+      var clickedLayer = this.name;
+      //e.preventDefault();
+      //e.stopPropagation();
+      console.log(clickedLayer);
+    var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+    // toggle layer visibility by changing the layout object's visibility property
+    if (visibility === 'visible') {
+      map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+      this.className = '';
+    } else {
+      this.className = 'active';
+      map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+      }
+    }
+    /*
 		// set up the corresponding toggle button for each layer
 		for (var i = 0; i < toggleableLayerIds.length; i++) {
 			var id = toggleableLayerIds[i];
 			 
 			var checkbox = document.createElement('input');
 			var checkboxlabel = document.createElement('label');
-			var spacer = document.createElement('br');
+      var node = document.createElement('li');
+			//var spacer = document.createElement('br');
 			checkbox.type = 'checkbox' 
 			checkbox.className = 'active';
 			checkbox.textContent = id;
@@ -427,12 +481,13 @@
 					}
 			};
 			 
-			var layers = document.getElementById('boxes1');
-			layers.appendChild(checkbox);
-			layers.appendChild(checkboxlabel);
-			layers.appendChild(spacer);
+			var layers = document.getElementById('checklist_sites');
+			node.appendChild(checkbox);
+			node.appendChild(checkboxlabel);
+      layers.appendChild(node);
+			//layers.appendChild(spacer);
 		}
-
+*/
 
         map.on('mouseenter', 'ditchicons', function() {
             map.getCanvas().style.cursor = 'pointer';
