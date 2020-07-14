@@ -48,10 +48,12 @@
 		</div>
     <div id="dataless">NO DATA</div>
     <div id="frosted"></div>
+    <div id="maphide"></div>
 		<script type="text/javascript">
-  		var x = document.getElementById("interactivegraph")
+  		var grapher = document.getElementById("interactivegraph")
       var dataless = document.getElementById("dataless");
       var frosted = document.getElementById("frosted");
+      var maphide = document.getElementById("maphide");
   		//x.style.display = "none";
   		var getJSON = function(url, callback) {
   		    var xhr = new XMLHttpRequest();
@@ -408,12 +410,13 @@
 		 
 for (var i = 0; i < toggleableLayerIds.length; i++) {
       var id = toggleableLayerIds[i];
-       
+      
       var checkbox = document.getElementById(id);
       //var checkboxlabel = document.createElement('label');
       //var node = document.createElement('li');
       //var spacer = document.createElement('br');
       checkbox.textContent = id;
+      checkbox.checked = false;
        
       checkbox.onclick = function(e) {
         var clickedLayer = this.textContent;
@@ -620,7 +623,8 @@ map.on('click', 'streamicons', function(e) {
             var description = e.features[0].properties.description;
             var siteNumber = e.features[0].properties.site_no;
             var siteName = e.features[0].properties.station_nm;
-
+            document.body.style.cursor = "wait";
+            maphide.style = "visibility: visible"
         getJSON(`/nwis_surfacewater/${siteNumber}`, function(err, data) {
           console.log("p1");
           var new_data = new Array (Object.keys(data.date).length);
@@ -673,6 +677,8 @@ map.on('click', 'streamicons', function(e) {
             'labels': labels_list
           })
         }
+        document.body.style.cursor = "auto";
+        maphide.style = "visibility: hidden"
       });//console.log(result.rows[0]['signal'])});
       //document.getElementById("bigdiv").style.display = "inline-block";   
 
