@@ -361,6 +361,14 @@ input[type=number] {
 	grid-row: 2 / 3;
 }
 
+#dataless {
+	color: black;
+	font-size: 30px;
+	text-align: center;
+	visibility: hidden;
+	z-index: 10;
+}
+
 #intleg.legend {
 	z-index: 10;
 	float: left;

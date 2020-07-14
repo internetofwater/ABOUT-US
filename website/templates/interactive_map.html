@@ -33,11 +33,14 @@
 	              <div><strong>PWSID:</strong>&nbsp;<span id="mag"></span></div>
 	              <div><strong>Name:</strong>&nbsp;<span id="loc"></span></div>
 			    </div>
-		<div id="interactivegraph"></div>
+		<div id="interactivegraph">
+    </div>
 		<div id="boxes2">
 		</div>
+    <div id="dataless">NO DATA</div>
 		<script type="text/javascript">
   		var x = document.getElementById("interactivegraph")
+      var dataless = document.getElementById("dataless");
   		//x.style.display = "none";
   		var getJSON = function(url, callback) {
   		    var xhr = new XMLHttpRequest();
@@ -431,15 +434,6 @@
 		}
 
 
-        map.on('mouseenter', 'streamicons', function() {
-            map.getCanvas().style.cursor = 'pointer';
-        });
-
-        // Change it back to a pointer when it leaves.
-        map.on('mouseleave', 'streamicons', function() {
-            map.getCanvas().style.cursor = '';
-        });
-
         map.on('mouseenter', 'ditchicons', function() {
             map.getCanvas().style.cursor = 'pointer';
         });
@@ -481,6 +475,38 @@
           .setLngLat(e.lngLat)
           .setHTML(e.features[0].properties.name)
           .addTo(map);
+      });
+
+      var popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+      });
+ 
+      map.on('mouseenter', 'streamicons', function(e) {
+      // Change the cursor style as a UI indicator.
+      map.getCanvas().style.cursor = 'pointer';
+       
+      var coordinates = e.features[0].geometry.coordinates.slice();
+      var siteName = e.features[0].properties.station_nm;
+       
+      // Ensure that if the map is zoomed out such that multiple
+      // copies of the feature are visible, the popup appears
+      // over the copy being pointed to.
+      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+      }
+       
+      // Populate the popup and set its coordinates
+      // based on the feature found.
+        popup
+          .setLngLat(coordinates)
+          .setHTML(siteName)
+          .addTo(map);
+      });
+       
+      map.on('mouseleave', 'streamicons', function() {
+        map.getCanvas().style.cursor = '';
+        popup.remove();
       });
    
       // Change the cursor to a pointer when the mouse is over the states layer.
@@ -537,6 +563,7 @@ map.on('click', 'streamicons', function(e) {
             var description = e.features[0].properties.description;
             var siteNumber = e.features[0].properties.site_no;
             var siteName = e.features[0].properties.station_nm;
+            dataless.style = 'visibility: hidden';
 
         getJSON(`/nwis_surfacewater/${siteNumber}`, function(err, data) {
           console.log(data);
@@ -549,6 +576,7 @@ map.on('click', 'streamicons', function(e) {
             //console.log("foo"); 
           }
           */
+          if (data != null) {
           console.log(Object.keys(data.date).length);
           console.log(data.date[0])
           for (var k = 0; k < Object.keys(data.date).length; k++) {
@@ -563,11 +591,20 @@ map.on('click', 'streamicons', function(e) {
           }
           console.log(new_data); 
           g.updateOptions({
+                  'visibility': true,
                   'file': new_data,
                   'title': siteName,
                   'labels': labels_list
-                  })
-        });//console.log(result.rows[0]['signal'])});
+                  });
+        } else {
+          dataless.style = 'visibility: visible';
+          g.updateOptions({
+            'visibility': false,
+            'title': siteName,
+            'labels': labels_list
+          })
+        }
+      });//console.log(result.rows[0]['signal'])});
       //document.getElementById("bigdiv").style.display = "inline-block";   
 
             // Ensure that if the map is zoomed out such that multiple
