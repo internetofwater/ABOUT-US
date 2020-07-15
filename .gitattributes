@@ -1,0 +1,17 @@
+utilities.geojson filter=lfs diff=lfs merge=lfs -text
+website/utilities.geojson filter=lfs diff=lfs merge=lfs -text
+website/EvenSimplerPolygonsNC.json filter=lfs diff=lfs merge=lfs -text
+website/SimplePolygonsNC.json filter=lfs diff=lfs merge=lfs -text
+website/EvenSimplerPolygonsNC.geojson filter=lfs diff=lfs merge=lfs -text
+website/NCstates.geojson filter=lfs diff=lfs merge=lfs -text
+stategeometries/ filter=lfs diff=lfs merge=lfs -text
+stategeometries/EvenSimplerPolygonsNC.geojson filter=lfs diff=lfs merge=lfs -text
+stategeometries/EvenSimplerPolygonsNC.json filter=lfs diff=lfs merge=lfs -text
+stategeometries/SimplePolygonsNC.json filter=lfs diff=lfs merge=lfs -text
+stategeometries/canal_points.geojson filter=lfs diff=lfs merge=lfs -text
+stategeometries/ditch_points.geojson filter=lfs diff=lfs merge=lfs -text
+stategeometries/stream_points.geojson filter=lfs diff=lfs merge=lfs -text
+stategeometries/utilities.geojson filter=lfs diff=lfs merge=lfs -text
+stategeometries/NCstates.geojson filter=lfs diff=lfs merge=lfs -text
+stategeometries/estuary_points.geojson filter=lfs diff=lfs merge=lfs -text
+stategeometries/lake_points.geojson filter=lfs diff=lfs merge=lfs -text
