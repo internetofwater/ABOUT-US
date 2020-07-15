@@ -29,7 +29,7 @@
 	<!-- <h1>Result</h1> -->
 	<div id="interface">
 		<section id="reporting">
-      <h3 style="text-align: center">Results</h3>
+      <h1 style="text-align: center">Results</h1>
       <div id="report_text">
   			{% if gran == 'zipcode_level' %}
   			<p class="warning"><strong>Warning: Address was unreadable so using zipcode to display utilities</strong></p>
@@ -53,7 +53,7 @@
         <p>Utility is {{uname}}</p>
         {% endif %}
 
-  			<p><strong>Follow this link to get conservation plan information</strong></p>
+  			<p><strong>Follow this link to get conservation plan information:</strong></p>
         <div id="plan_link"><a href={{linkname}} target="_blank">Conservation Plan</a></div>
       </div>
 		</section>
@@ -64,7 +64,7 @@
               <div><strong>PWSID:</strong>&nbsp;<span id="mag"></span></div>
               <div><strong>Name:</strong>&nbsp;<span id="loc"></span></div>
 		    </div>
-		<div id="graphdiv"></div>
+		<!-- <div id="graphdiv"></div> -->
 	<script type="text/javascript">
   		var x = document.getElementById("graphdiv")
   		//x.style.display = "none";
@@ -82,7 +82,7 @@
   		    };
   		    xhr.send();
   		};
-
+/*
 		// is this the right place for this? 
     	var data = 'date,precipitation\n2018-01-01,83.84160786786978\n';
     	g = new Dygraph(
@@ -98,7 +98,7 @@
         legend: 'always'
       }
 		  );
-
+*/
 		mapboxgl.accessToken = 'pk.eyJ1IjoiYnR3MTkiLCJhIjoiY2tiOGR6MzI1MDNjaTJ0c3hnZHBmODRneSJ9.QVj1xKQ--FUvtw6soygk9g';
 		var map = new mapboxgl.Map({
 			container: 'mapfigure',

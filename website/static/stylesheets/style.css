@@ -224,13 +224,13 @@ input[type=number] {
 /* Search Page */
 
 #interface {
-  height: auto;
+  height: 90vh;
   width: 90%;
   display: grid;
   grid-template-columns: 40% 60%;
-  grid-template-rows: 370px 330px;
+  grid-template-rows: 100%;
   margin: 0px auto 50px;
-  grid-gap: 5px 5px;
+  grid-gap: 0px 7px;
   margin-top: 20px;
 }
 
@@ -243,7 +243,7 @@ input[type=number] {
 #report_text {
 	height: auto;
 	margin: auto;
-	width: 450px;
+	padding: 6%;
 }
 
 .warning {
@@ -270,7 +270,7 @@ input[type=number] {
 	border: 1px solid black;
   	background-color: #333;
   	color: black;
-  	padding: 8px 10px;
+  	padding: 3% 6%;
   	font-size: 16px;
   	cursor: pointer;
   	border-color: #333;
@@ -280,7 +280,6 @@ input[type=number] {
 
 #plan_link {
 	margin: auto;
-	width: 50%;
 	text-align: center;
 }
 
@@ -293,7 +292,7 @@ input[type=number] {
 	border-radius: 5px;
 	border: 2px black solid;
 }
-
+/*
 #graphdiv {
 	height: 100%;
 	width: auto;
@@ -303,7 +302,7 @@ input[type=number] {
 	border: 2px black solid;
 	border-radius: 5px;
 }
-
+*/
 #searchleg.legend {
 	grid-column: 2 / 3;
 	grid-row: 1 / 2;
