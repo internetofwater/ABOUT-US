@@ -80,7 +80,7 @@
       // CSV or path to a CSV file.
       data,
       {
-        ylabel: 'Amount (units)',
+        ylabel: 'Height (ft)',
         title: 'title', //'Calculation of Amount of Units from Streamgage',
         legend: 'always'
       }
@@ -626,9 +626,9 @@ map.on('click', 'streamicons', function(e) {
             document.body.style.cursor = "wait";
             maphide.style = "visibility: visible"
         getJSON(`/nwis_surfacewater/${siteNumber}`, function(err, data) {
-          console.log("p1");
-          var new_data = new Array (Object.keys(data.date).length);
-          var labels_list = ["date", "gage_height_max", "gage_height_min", "gage_mean"];
+          console.log(data);
+          var new_data = new Array (Object.keys(data.day).length);
+          var labels_list = ["date", "gage_height_min_avg", "gage_height_max_avg", "gage_mean_avg"];
           //console.log("stuff")
           /*
           for (i=0; i<data.data.length; i++) {
@@ -639,14 +639,18 @@ map.on('click', 'streamicons', function(e) {
           if (data != null) {
           //console.log(Object.keys(data.date).length);
           //console.log(data.date[0])
-          for (var k = 0; k < Object.keys(data.date).length; k++) {
+          for (var k = 0; k < Object.keys(data.day).length; k++) {
             new_data[k] = new Array(4);
-            var new_date = data.date[k];
+            const yearFake = 3000
+            var new_date = `${data.month[k]}/${data.day[k]}/${yearFake}`;
             var dt = new Date(new_date);
             new_data[k][0] = dt;
-            new_data[k][1] = data.gage_height_max[k];
+            /*new_data[k][1] = data.gage_height_max[k];
             new_data[k][2] = data.gage_height_min[k];
-            new_data[k][3] = data.gage_mean[k];
+            new_data[k][3] = data.gage_mean[k]; */
+            new_data[k][1] = data.gage_height_max_avg[k];
+            new_data[k][2] = data.gage_height_min_avg[k];
+            new_data[k][3] = data.gage_mean_avg[k];
             //labels_list.push(data[0][j]);
           }
           console.log("p2");
@@ -659,6 +663,7 @@ map.on('click', 'streamicons', function(e) {
                   'title': siteName,
                   'labels': labels_list
                   });
+            console.log("p3")
           } else {
               dataless.style = 'visibility: visible';
               frosted.style = 'visibility: visible';
@@ -667,6 +672,7 @@ map.on('click', 'streamicons', function(e) {
                 'title': siteName,
                 'labels': labels_list
               });
+              console.log("p3.5")
             }
         } else {
           dataless.style = 'visibility: visible';
@@ -676,6 +682,7 @@ map.on('click', 'streamicons', function(e) {
             'title': siteName,
             'labels': labels_list
           })
+          console.log("p4")
         }
         document.body.style.cursor = "auto";
         maphide.style = "visibility: hidden"

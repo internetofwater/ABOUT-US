@@ -91,14 +91,13 @@ def send_groundwater_data(site_no):
 def send_surfacewater_data(site_no):
     print(site_no)
     query= """SELECT year, b.*, a.gage_height_min, a.gage_height_max, a.gage_mean FROM nwis.surfacewater_daily_site_2 a
-        LEFT JOIN (SELECT AVG(gage_height_min) gage_height_min_avg, AVG(gage_height_max) gage_height_max_avg, AVG(gage_mean) gage_mean_avg, day, month
+        LEFT JOIN (SELECT AVG(gage_height_min) gage_height_min_avg, AVG(gage_height_max) gage_height_max_avg, AVG(gage_mean) gage_mean_avg, day, month, datenew
         FROM nwis.surfacewater_daily_site_2
         WHERE site_number = '02142654'
-        GROUP BY month, day) b
+        GROUP BY month, day, datenew) b
         ON a.month=b.month AND a.day = b.day
-        WHERE site_number = '02142654' AND DATE_PART('day',date::TIMESTAMP - NOW()) > -365
-
-        ORDER BY year, month, day ASC""".format(site_no)
+        WHERE site_number = '02142654' AND DATE_PART('day',b.datenew::TIMESTAMP - NOW()) > -365
+        ORDER BY month, day ASC""".format(site_no)
 
     data = pd.read_sql_query(query, cnx)# get site_data from sql 
     #data['date'] = pd.to_datetime(data['date']);
