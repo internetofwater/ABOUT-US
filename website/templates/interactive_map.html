@@ -43,18 +43,17 @@
           <p>
             <input type=checkbox id="0" onClick="change(this)">
             <label for="0"> Gage Height Minimun All Time Average</label><br/>
-            <input type=checkbox id="1" checked onClick="change(this)">
+            <input type=checkbox id="1" onClick="change(this)">
             <label for="1"> Gage Height Maximum All Time Average</label><br/>
-            <input type=checkbox id="2" checked onClick="change(this)">
+            <input type=checkbox id="2" onClick="change(this)">
             <label for="2"> Gage Height Mean All Time Average</label><br/>
-            <input type=checkbox id="3" checked onClick="change(this)">
+            <input type=checkbox id="3" onClick="change(this)">
             <label for="3">Gage Height Maximum 2020</label><br/>
-            <input type=checkbox id="4" checked onClick="change(this)">
+            <input type=checkbox id="4" onClick="change(this)">
             <label for="4">Gage Height Minimum 2020</label><br/>
-            <input type=checkbox id="5" checked onClick="change(this)">
+            <input type=checkbox id="5" onClick="change(this)">
             <label for="5">Gage Height Mean 2020</label><br/>
           </p>
-          <p>g.visibility() = <span id="visibility_mine"></span></p>
         </div>
 			</div>
 			<div id='interactivemap'></div>
@@ -62,15 +61,12 @@
 	              <div><strong>PWSID:</strong>&nbsp;<span id="mag"></span></div>
 	              <div><strong>Name:</strong>&nbsp;<span id="loc"></span></div>
 			    </div>
-    <div id="graphtotal">
-		  <div id="interactivegraph">
-      </div>
+		  <div id="interactivegraph"></div>
+  		<div id="boxes2"></div>
+      <div id="dataless">NO DATA</div>
+      <div id="frosted"></div>
+      <div id="maphide"></div>
     </div>
-		<div id="boxes2">
-		</div>
-    <div id="dataless">NO DATA</div>
-    <div id="frosted"></div>
-    <div id="maphide"></div>
 		<script type="text/javascript">
   		var grapher = document.getElementById("interactivegraph");
       var dataless = document.getElementById("dataless");
@@ -103,9 +99,9 @@
       // CSV or path to a CSV file.
       data,
       {
-        ylabel: 'Height (ft)',
-        title: 'title', //'Calculation of Amount of Units from Streamgage',
-        legend: 'always'
+        'ylabel': 'Gage Height (ft)',
+        'legend': 'none',
+        'visibility': [false]
       }
 		  );
 
@@ -548,17 +544,8 @@ map.on('click', 'streamicons', function(e) {
         getJSON(`/nwis_surfacewater/${siteNumber}`, function(err, data) {
           console.log(data);
           var labels_list = ["date", "gage_height_min_avg", "gage_height_max_avg", "gage_mean_avg", "gage_height_max", "gage_height_min", "gage_mean"];
-          //console.log("stuff")
-          /*
-          for (i=0; i<data.data.length; i++) {
-            data.data[i][0] = new Date(data.data[i][0]);
-            //console.log("foo"); 
-          }
-          */
           if (data != null) {
           var new_data = new Array (Object.keys(data.day).length);
-          //console.log(Object.keys(data.date).length);
-          //console.log(data.date[0])
           for (var k = 0; k < Object.keys(data.day).length; k++) {
             new_data[k] = new Array(7);
             const yearFake = 2020
@@ -571,7 +558,6 @@ map.on('click', 'streamicons', function(e) {
             new_data[k][4] = data.gage_height_max[k];
             new_data[k][5] = data.gage_height_min[k];
             new_data[k][6] = data.gage_mean[k];
-            //labels_list.push(data[0][j]);
           }
           console.log("p2");
           dataless.style = 'visibility: hidden';
@@ -581,6 +567,7 @@ map.on('click', 'streamicons', function(e) {
                   'visibility': [true, true, true, true, true, true],
                   'file': new_data,
                   'title': siteName,
+                  'legend': 'always',
                   'labels': labels_list
                   });
             console.log("p3")
@@ -607,9 +594,7 @@ map.on('click', 'streamicons', function(e) {
         document.body.style.cursor = "auto";
         maphide.style = "visibility: hidden"
       });
-    });
-      //console.log(result.rows[0]['signal'])});
-      //document.getElementById("bigdiv").style.display = "inline-block";   
+    });  
 
             // Ensure that if the map is zoomed out such that multiple
             // copies of the feature are visible, the popup appears
@@ -625,20 +610,16 @@ map.on('click', 'streamicons', function(e) {
             */
 
   maybe.style = 'visibility: visibile'
-  g.updateOptions({
-          visibility: [true, true, true, true, true, true]
-      });
-  setStatus();
-
-
-  function setStatus() {
-    document.getElementById("visibility_mine").innerHTML =
-      g.visibility().toString();
+  var toggleableGraphIds = ['0', '1', '2', '3', '4', '5'];
+     
+  for (var i = 0; i < toggleableGraphIds.length; i++) {
+      var id = toggleableGraphIds[i];
+      var checkbox = document.getElementById(id);
+      checkbox.checked = true; 
   }
 
   function change(el) {
     g.setVisibility(parseInt(el.id), el.checked);
-    setStatus();
   }
 
 

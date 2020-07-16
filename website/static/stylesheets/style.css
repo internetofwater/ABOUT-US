@@ -317,9 +317,6 @@ input[type=number] {
 }
 
 /* Interactive Map Page */
-#holder {
-	background-image: linear-gradient(#333, lightblue);
-}
 
 .holder {
 	height: 755px;
@@ -330,6 +327,7 @@ input[type=number] {
 }
 
 #boxes1 {
+	background-image: linear-gradient(#333, lightblue);
 	grid-column: 1 / 2;
 	grid-row: 1 / 3;
 }
