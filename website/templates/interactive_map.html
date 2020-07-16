@@ -26,14 +26,19 @@
 		<div class='holder'>
 			<div id="boxes1">
 				<h2 style="padding-left: 20px; color: white;">Selector</h2>
-				<p style="padding-left: 20px; color: white;">Choose which you'd like to show</p>
+				<p style="padding-left: 20px; color: white; margin-bottom: 0;">Choose which you'd like to show</p>
         <div class='container'>
           <ul class="ks-cboxtags" id="checklist_sites">
+            <li><p style="color: white;">Surface Water</p></li>
             <li><input type="checkbox" id="lakeicons"><label for="lakeicons">Lakes</label></li>
             <li><input type="checkbox" id="streamicons"><label for="streamicons">Streams</label></li>
             <li><input type="checkbox" id="ditchicons" ><label for="ditchicons">Ditches</label></li>
             <li><input type="checkbox" id="canalicons" ><label for="canalicons">Canals</label></li>
             <li><input type="checkbox" id="estuaryicons" ><label for="estuaryicons">Estuaries</label></li>
+          </ul>
+          <ul class="ks-cboxtags" id="checklist_sites_ground">
+            <li><p style="color: white;">Ground Water</p></li>
+            <li><input type="checkbox" id="wellicons" ><label for="wellicons">Wells</label></li>
           </ul>
         </div>
         <div id="graph_checkboxes">
@@ -320,10 +325,28 @@
                 }
             });
 
+    map.addSource('wellicons', {
+          'type': 'vector',
+          'url': 'mapbox://btw19.7itox5qk'
+        });
+
+        map.addLayer({
+                'id': 'wellicons',
+                'type': 'symbol',
+                'source': 'wellicons',
+                'source-layer': 'groundwater_points-a862jp',
+                'layout': {
+                    'icon-image': 'viewpoint-15',
+                    'icon-allow-overlap': true,
+                    'icon-size': 1,
+                    'visibility': 'none'
+                }
+            });
+
         });
 
 		// enumerate ids of the layers
-		var toggleableLayerIds = ['lakeicons', 'streamicons', 'ditchicons', 'canalicons', 'estuaryicons'];
+		var toggleableLayerIds = ['lakeicons', 'streamicons', 'ditchicons', 'canalicons', 'estuaryicons', 'wellicons'];
 		 
 for (var i = 0; i < toggleableLayerIds.length; i++) {
       var id = toggleableLayerIds[i];
@@ -458,6 +481,20 @@ for (var i = 0; i < toggleableLayerIds.length; i++) {
         closeOnClick: false
       });
  
+      map.on('mouseenter', 'wellicons', function(e) {
+      // Change the cursor style as a UI indicator.
+      map.getCanvas().style.cursor = 'pointer';
+       
+      var coordinates = e.features[0].geometry.coordinates.slice();
+      var siteName = e.features[0].properties.station_nm;
+       
+      // Ensure that if the map is zoomed out such that multiple
+      // copies of the feature are visible, the popup appears
+      // over the copy being pointed to.
+      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+      }
+
       map.on('mouseenter', 'streamicons', function(e) {
       // Change the cursor style as a UI indicator.
       map.getCanvas().style.cursor = 'pointer';
@@ -542,7 +579,7 @@ map.on('click', 'streamicons', function(e) {
             document.body.style.cursor = "wait";
             maphide.style = "visibility: visible"
         getJSON(`/nwis_surfacewater/${siteNumber}`, function(err, data) {
-          console.log(data);
+          //console.log(data);
           var labels_list = ["date", "gage_height_min_avg", "gage_height_max_avg", "gage_mean_avg", "gage_height_max", "gage_height_min", "gage_mean"];
           if (data != null) {
           var new_data = new Array (Object.keys(data.day).length);
@@ -594,7 +631,69 @@ map.on('click', 'streamicons', function(e) {
         document.body.style.cursor = "auto";
         maphide.style = "visibility: hidden"
       });
-    });  
+    });
+
+map.on('click', 'wellicons', function(e) {
+            var coordinates = e.features[0].geometry.coordinates.slice();
+            var description = e.features[0].properties.description;
+            var siteNumber = e.features[0].properties.site_no;
+            var siteName = e.features[0].properties.station_nm;
+            document.body.style.cursor = "wait";
+            maphide.style = "visibility: visible"
+        getJSON(`/nwis_groundwater/${siteNumber}`, function(err, data) {
+          //console.log(data);
+          var labels_list = ["date", "gage_height_min_avg", "gage_height_max_avg", "gage_mean_avg", "gage_height_max", "gage_height_min", "gage_mean"];
+          if (data != null) {
+          var new_data = new Array (Object.keys(data.day).length);
+          for (var k = 0; k < Object.keys(data.day).length; k++) {
+            new_data[k] = new Array(7);
+            const yearFake = 2020
+            var new_date = `${data.month[k]}/${data.day[k]}/${yearFake}`;
+            var dt = new Date(new_date);
+            new_data[k][0] = dt;
+            new_data[k][1] = data.gage_height_min_avg[k];
+            new_data[k][2] = data.gage_height_max_avg[k];
+            new_data[k][3] = data.gage_mean_avg[k];
+            new_data[k][4] = data.gage_height_max[k];
+            new_data[k][5] = data.gage_height_min[k];
+            new_data[k][6] = data.gage_mean[k];
+          }
+          console.log("p2");
+          dataless.style = 'visibility: hidden';
+          frosted.style = 'visibility: hidden'; 
+          if (new_data.length) {
+            g.updateOptions({
+                  'visibility': [true, true, true, true, true, true],
+                  'file': new_data,
+                  'title': siteName,
+                  'legend': 'always',
+                  'labels': labels_list
+                  });
+            console.log("p3")
+          } else {
+              dataless.style = 'visibility: visible';
+              frosted.style = 'visibility: visible';
+              g.updateOptions({
+                'visibility': [false, false, false, false, false, false],
+                'title': siteName,
+                'labels': labels_list
+              });
+              console.log("p3.5")
+            }
+        } else {
+          dataless.style = 'visibility: visible';
+          frosted.style = 'visibility: visible';
+          g.updateOptions({
+            'visibility': [false, false, false, false, false, false],
+            'title': siteName,
+            'labels': labels_list
+          })
+          console.log("p4")
+        }
+        document.body.style.cursor = "auto";
+        maphide.style = "visibility: hidden"
+      });
+    });   
 
             // Ensure that if the map is zoomed out such that multiple
             // copies of the feature are visible, the popup appears
