@@ -366,6 +366,11 @@ input[type=number] {
 	grid-row: 1 / 2;
 }
 
+#graph_checkboxes {
+	padding: 15px;
+	color: white;
+}
+
 #dataless {
 	height: 100px;
 	color: black;
