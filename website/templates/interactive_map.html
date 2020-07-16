@@ -498,6 +498,12 @@ for (var i = 0; i < toggleableLayerIds.length; i++) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
       }
 
+      popup
+          .setLngLat(coordinates)
+          .setHTML(siteName)
+          .addTo(map);
+      });
+
       map.on('mouseenter', 'streamicons', function(e) {
       // Change the cursor style as a UI indicator.
       map.getCanvas().style.cursor = 'pointer';
