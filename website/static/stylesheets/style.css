@@ -360,7 +360,8 @@ input[type=number] {
 }
 
 #graph_checkboxes {
-
+	padding: 15px;
+	color: white;
 }
 
 #dataless {
