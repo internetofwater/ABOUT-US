@@ -17,7 +17,7 @@
 	</head>
 	<body>
 		<div class="topnav">
-			<a href="https://internetofwater.org/" class="iow" target="_blank"><img src="{{ url_for('static', filename='img/iow.jpg') }}"></a>
+			<a href="https://internetofwater.org/" class="iow" target="_blank"><img src="{{ url_for('static', filename='img/iowclearwhite.png') }}"></a>
 			<a href="/" class="navigation fa fa-home"></a>
 			<a href="./about_us" class="navigation">About Us</a>
 			<a href="./utilityfinder" class="navigation">Utility Finder</a>
@@ -25,8 +25,8 @@
 		</div>
 		<div class='holder'>
 			<div id="boxes1">
-				<h2>Selector</h2>
-				<p>Choose which you'd like to show</p>
+				<h2 style="padding-left: 20px; color: white;">Selector</h2>
+				<p style="padding-left: 20px; color: white;">Choose which you'd like to show</p>
         <div class='container'>
           <ul class="ks-cboxtags" id="checklist_sites">
             <li><input type="checkbox" id="lakeicons"><label for="lakeicons">Lakes</label></li>
@@ -112,7 +112,7 @@
             'maxzoom': 6.99,
                         'paint': {
                     'fill-color': '#4EE91E',
-                    'fill-opacity': 
+                    'fill-opacity': [
                               'case',
                               ['boolean', ['feature-state', 'hover'], false],
                               0.5,

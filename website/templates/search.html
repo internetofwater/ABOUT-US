@@ -20,7 +20,7 @@
 	</head>
 	<body>
 	<div class="topnav">
-	  <a href="https://internetofwater.org/" class="iow" target="_blank"><img src="{{ url_for('static', filename='img/iow.jpg') }}"></a>
+	  <a href="https://internetofwater.org/" class="iow" target="_blank"><img src="{{ url_for('static', filename='img/iowclearwhite.png') }}"></a>
 	  <a href="/" class="navigation fa fa-home"></a>
 	  <a href="./about_us" class="navigation">About Us</a>
 	  <a href="./utilityfinder" class="navigation">Utility Finder</a>
@@ -38,22 +38,22 @@
   			<p class="warning"><strong>Warning: No utility for your area to display</strong></p>
   			{% endif %}
         {% if ad == '' %}
-        <p>No Address Given</p>
+        <p><strong>No Address Given</strong></p>
         {% else %}
-        <p>Address is {{ad}}</p>
+        <p><strong>Address is</strong> {{ad}}</p>
         {% endif %}
-        <p>Zipcode is {{zipc}}</p>
+        <p><strong>Zipcode is</strong> {{zipc}}</p>
         <!--<p>State is {{st}}</p>-->
         <!--Granularity is : {{gran}}</p>-->
-  			<p>Latitude is {{lat}}</p>
-        <p>Longitude is {{lon}} </p>
+  			<p><strong>Latitude is</strong> {{lat}}</p>
+        <p><strong>Longitude is</strong> {{lon}} </p>
         {% if uname == 'None' %}
-  			<p>No Utility/Well Water</p>
+  			<p><strong>No Utility/Well Water</strong></p>
         {% else %}
-        <p>Utility is {{uname}}</p>
+        <p><strong>Utility is </strong>{{uname}}</p>
         {% endif %}
-
-  			<p><strong>Follow this link to get conservation plan information:</strong></p>
+        <br>
+  			<p style="text-align: center;"><strong>Follow this link to get conservation plan information:</strong></p><br>
         <div id="plan_link"><a href={{linkname}} target="_blank">Conservation Plan</a></div>
       </div>
 		</section>
@@ -102,7 +102,7 @@
 		mapboxgl.accessToken = 'pk.eyJ1IjoiYnR3MTkiLCJhIjoiY2tiOGR6MzI1MDNjaTJ0c3hnZHBmODRneSJ9.QVj1xKQ--FUvtw6soygk9g';
 		var map = new mapboxgl.Map({
 			container: 'mapfigure',
-			style: 'mapbox://styles/btw19/ckb9tgy821c6j1itda2ynmftu', // stylesheet location
+			style: 'mapbox://styles/mapbox/light-v10', // stylesheet location
 			center: [{{lon}}, {{lat}}], // starting position [lng, lat]
 			zoom: 12 // starting zoom
 		});
