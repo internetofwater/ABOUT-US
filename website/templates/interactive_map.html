@@ -128,24 +128,46 @@
 			zoom: 5.5 // starting zoom
 		});
 
-    	map.addControl(new mapboxgl.NavigationControl());
+     map.addControl(new mapboxgl.NavigationControl());
         var magDisplay = document.getElementById('mag');
-      	var locDisplay = document.getElementById('loc');
+        var locDisplay = document.getElementById('loc');
 
       map.on('load', function() {
         map.addSource('utilities-simplest', {
           'type': 'vector',
-          'url': 'mapbox://btw19.2fhcidlx'
+          'url': 'mapbox://btw19.c5i9z094'
         });
 
-   /*   map.addLayer({
+      map.addLayer({
           'id': 'utilities-simplest-viz',
-            'source-layer': 'EvenSimplerPolygonsNC-9cvs7f',
+            'source-layer': 'EvenSimplerPolygonsNC-a1qsdf',
             'type': 'fill',
             'source': 'utilities-simplest',
             'maxzoom': 6.99,
                         'paint': {
-                    'fill-color': '#4EE91E',
+                    'fill-color':  [
+'interpolate',
+['linear'],
+['get', 'PWSID_INT'],
+0,
+'#F2F12D',
+100000,
+'#EED322',
+110000,
+'#E6B71E',
+120000,
+'#DA9C20',
+130000,
+'#CA8323',
+150000,
+'#B86B25',
+180000,
+'#A25626',
+200000,
+'#8B4225',
+800000,
+'#723122'
+],
                     'fill-opacity': [
                               'case',
                               ['boolean', ['feature-state', 'hover'], false],
@@ -154,11 +176,11 @@
                           ]
                         }
 
-      }); */
+      }); 
 
       map.addLayer({
           'id': 'utilities-simplest-border-viz',
-            'source-layer': 'EvenSimplerPolygonsNC-9cvs7f',
+            'source-layer': 'EvenSimplerPolygonsNC-a1qsdf',
             'type': 'line',
             'source': 'utilities-simplest',
             'maxzoom': 6.99,
@@ -170,18 +192,40 @@
        
       map.addSource('utilities-simpler', {
           'type': 'vector',
-          'url': 'mapbox://btw19.0j0f3yp6'
+          'url': 'mapbox://btw19.4edt3p8r'
       });
 
         map.addLayer({
           'id': 'utilities-simpler-viz',
-          'source-layer': 'SimplePolygonsNC-bz1aui',
+          'source-layer': 'SimplePolygonsNC-4d1tv2',
           'type': 'fill',
           'source': 'utilities-simpler',
           'minzoom': 7,
           'maxzoom': 10,
           'paint': {
-                'fill-color': '#4EE91E',
+                'fill-color':  [
+'interpolate',
+['linear'],
+['get', 'PWSID_INT'],
+0,
+'#F2F12D',
+100000,
+'#EED322',
+110000,
+'#E6B71E',
+120000,
+'#DA9C20',
+130000,
+'#CA8323',
+150000,
+'#B86B25',
+180000,
+'#A25626',
+200000,
+'#8B4225',
+800000,
+'#723122'
+],
                 'fill-opacity': [
                         'case',
                         ['boolean', ['feature-state', 'hover'], false],
@@ -193,7 +237,7 @@
 
       map.addLayer({
           'id': 'utilities-simpler-border-viz',
-          'source-layer': 'SimplePolygonsNC-bz1aui',
+          'source-layer': 'SimplePolygonsNC-4d1tv2',
           'type': 'line',
           'source': 'utilities-simpler',
           'minzoom': 7,
@@ -206,18 +250,40 @@
   
       map.addSource('utilities', {
           'type': 'vector',
-          'url': 'mapbox://btw19.9b4ihil6'
+          'url': 'mapbox://btw19.283iigb7'
         });
 
       map.addLayer({
           'id': 'utilities-viz',
-          'source-layer': 'utilities-9lcba8',
+          'source-layer': 'utilities-35banb',
           'type': 'fill',
           'source': 'utilities',
           'layout': {},
           'minzoom': 10,
           'paint': {
-                    'fill-color': '#4EE91E',
+                    'fill-color':  [
+'interpolate',
+['linear'],
+['get', 'PWSID_INT'],
+0,
+'#F2F12D',
+100000,
+'#EED322',
+110000,
+'#E6B71E',
+120000,
+'#DA9C20',
+130000,
+'#CA8323',
+150000,
+'#B86B25',
+180000,
+'#A25626',
+200000,
+'#8B4225',
+800000,
+'#723122'
+],
                     'fill-opacity': [
                               'case',
                               ['boolean', ['feature-state', 'hover'], false],
@@ -229,7 +295,7 @@
 
       map.addLayer({
             'id': 'utilities-border-viz',
-            'source-layer': 'utilities-9lcba8',
+            'source-layer': 'utilities-35banb',
             'type': 'line',
             'source': 'utilities',
             'layout': {},
@@ -743,6 +809,7 @@ map.on('click', 'wellicons', function(e) {
 
 
 
+     
       var quakeID = null;
       map.on('mouseenter', 'utilities-viz', e => {
           // Set variables equal to the current feature's magnitude, location, and time
@@ -757,7 +824,7 @@ map.on('click', 'wellicons', function(e) {
             // feature state for the feature under the mouse
             if (quakeID) {
               map.setFeatureState(
-              { source: 'utilities', sourceLayer: "utilities-9lcba8", id: quakeID },
+              { source: 'utilities', sourceLayer: "utilities-35banb", id: quakeID },
               { hover :true }
               );
             }
@@ -773,7 +840,7 @@ map.on('click', 'wellicons', function(e) {
             map.setFeatureState(
               {
                 source: 'utilities',
-                sourceLayer: "utilities-9lcba8",
+                sourceLayer: "utilities-35banb",
                 id: quakeID
               },
               {
@@ -802,7 +869,7 @@ map.on('click', 'wellicons', function(e) {
             // feature state for the feature under the mouse
             if (quakeID) {
               map.setFeatureState(
-              { source: 'utilities-simpler', sourceLayer: "SimplePolygonsNC-bz1aui", id: quakeID },
+              { source: 'utilities-simpler', sourceLayer: "SimplePolygonsNC-4d1tv2", id: quakeID },
               { hover :true }
               );
             }
@@ -821,7 +888,7 @@ map.on('click', 'wellicons', function(e) {
             map.setFeatureState(
               {
                 source: 'utilities-simpler',
-                sourceLayer: "SimplePolygonsNC-bz1aui",
+                sourceLayer: "SimplePolygonsNC-4d1tv2",
                 id: quakeID
               },
               {
@@ -848,7 +915,7 @@ map.on('click', 'wellicons', function(e) {
             // feature state for the feature under the mouse
             if (quakeID) {
               map.setFeatureState(
-              { source: 'utilities-simplest', sourceLayer: "EvenSimplerPolygonsNC-9cvs7f", id: quakeID },
+              { source: 'utilities-simplest', sourceLayer: "EvenSimplerPolygonsNC-a1qsdf", id: quakeID },
               { hover :true }
               );
             }
@@ -862,7 +929,7 @@ map.on('click', 'wellicons', function(e) {
             map.setFeatureState(
               {
                 source: 'utilities-simplest',
-                sourceLayer: "EvenSimplerPolygonsNC-9cvs7f",
+                sourceLayer: "EvenSimplerPolygonsNC-a1qsdf",
                 id: quakeID
               },
               {
