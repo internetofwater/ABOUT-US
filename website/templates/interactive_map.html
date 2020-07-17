@@ -56,9 +56,9 @@
           <p><b>Past 365 Days:</b></p>
           <p>
             <input type=checkbox id="3" onClick="change(this)">
-            <label for="3">Gage Height Maximum</label><br/>
+            <label for="3">Gage Height Minimum</label><br/>
             <input type=checkbox id="4" onClick="change(this)">
-            <label for="4">Gage Height Minimum</label><br/>
+            <label for="4">Gage Height Maximum</label><br/>
             <input type=checkbox id="5" onClick="change(this)">
             <label for="5">Gage Height Mean</label><br/>
           </p>
@@ -81,6 +81,13 @@
       var frosted = document.getElementById("frosted");
       var maphide = document.getElementById("maphide");
       var maybe = document.getElementById("div_g");
+      var gage_min_avg_box = document.getElementById("0");
+      var gage_max_avg_box = document.getElementById("1");
+      var gage_mean_avg_box = document.getElementById("2");
+      var gage_min_365_box = document.getElementById("3");
+      var gage_max_365_box = document.getElementById("4");
+      var gage_mean_365_box = document.getElementById("5");
+
   		//x.style.display = "none";
   		var getJSON = function(url, callback) {
   		    var xhr = new XMLHttpRequest();
@@ -588,7 +595,7 @@ map.on('click', 'streamicons', function(e) {
             document.body.style.cursor = "wait";
             maphide.style = "visibility: visible"
         getJSON(`/nwis_surfacewater/${siteNumber}`, function(err, data) {
-          //console.log(data);
+          console.log(data);
           var labels_list = ["date", "gage_height_min_avg", "gage_height_max_avg", "gage_mean_avg", "gage_height_max", "gage_height_min", "gage_mean"];
           if (data != null) {
           var new_data = new Array (Object.keys(data.day).length);
@@ -606,11 +613,12 @@ map.on('click', 'streamicons', function(e) {
             new_data[k][6] = data.gage_mean[k];
           }
           console.log("p2");
+          console.log(gage_min_avg_box.checked);
           dataless.style = 'visibility: hidden';
           frosted.style = 'visibility: hidden'; 
           if (new_data.length) {
             g.updateOptions({
-                  'visibility': [true, true, true, true, true, true],
+                  'visibility': [gage_min_avg_box.checked, gage_max_avg_box.checked, gage_mean_avg_box.checked, gage_min_365_box.checked, gage_max_365_box.checked, gage_mean_365_box.checked],
                   'file': new_data,
                   'title': siteName,
                   'legend': 'always',
@@ -651,7 +659,7 @@ map.on('click', 'wellicons', function(e) {
             maphide.style = "visibility: visible"
         getJSON(`/nwis_groundwater/${siteNumber}`, function(err, data) {
           //console.log(data);
-          var labels_list = ["date", "gage_height_min_avg", "gage_height_max_avg", "gage_mean_avg", "gage_height_max", "gage_height_min", "gage_mean"];
+          var labels_list = ["date", "gage_height_min_avg", "gage_height_max_avg", "gage_mean_avg", "gage_height_min", "gage_height_max",  "gage_mean"];
           if (data != null) {
           var new_data = new Array (Object.keys(data.day).length);
           for (var k = 0; k < Object.keys(data.day).length; k++) {
@@ -663,16 +671,17 @@ map.on('click', 'wellicons', function(e) {
             new_data[k][1] = data.gage_height_min_avg[k];
             new_data[k][2] = data.gage_height_max_avg[k];
             new_data[k][3] = data.gage_mean_avg[k];
-            new_data[k][4] = data.gage_height_max[k];
-            new_data[k][5] = data.gage_height_min[k];
+            new_data[k][4] = data.gage_height_min[k];
+            new_data[k][5] = data.gage_height_max[k];
             new_data[k][6] = data.gage_mean[k];
           }
           console.log("p2");
+          console.log(gage_min_avg_box.checked);
           dataless.style = 'visibility: hidden';
           frosted.style = 'visibility: hidden'; 
           if (new_data.length) {
             g.updateOptions({
-                  'visibility': [true, true, true, true, true, true],
+                  'visibility': [gage_min_avg_box.checked, gage_max_avg_box.checked, gage_mean_avg_box.checked, gage_min_365_box.checked, gage_max_365_box.checked, gage_mean_365_box.checked],
                   'file': new_data,
                   'title': siteName,
                   'legend': 'always',
