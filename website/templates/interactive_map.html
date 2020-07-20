@@ -75,7 +75,12 @@
 	              <div><strong>Name:</strong>&nbsp;<span id="loc"></span></div>
 			    </div>
 		  <div id="interactivegraph"></div>
-  		<div id="boxes2"></div>
+  		<div id="boxes2">
+        <!--<div class="listheader">
+          <h1>List of Streams</h1>
+        </div>
+        <div id='listings' class='listings'></div> -->
+      </div>
       <div id="dataless">NO DATA</div>
       <div id="frosted"></div>
       <div id="maphide"></div>
@@ -423,7 +428,7 @@
                     'visibility': 'none'
                 }
             });
-
+        //buildLocationList();
         });
 
 		// enumerate ids of the layers
@@ -456,6 +461,40 @@ for (var i = 0; i < toggleableLayerIds.length; i++) {
        
       //layers.appendChild(spacer);
     }
+/*
+function buildLocationList(data) {
+  data.features.forEach(function(streamlocs, i){
+    *
+     * Create a shortcut for `store.properties`,
+     * which will be used several times below.
+    *
+    var prop = streamlocs.properties;
+
+    /* Add a new listing section to the sidebar. 
+    var listings = document.getElementById('boxes2');
+    var listing = listings.appendChild(document.createElement('div'));
+    /* Assign a unique `id` to the listing. 
+    listing.id = "listing-" + prop.site_no;
+    /* Assign the `item` class to each listing for styling. 
+    listing.className = 'item';
+
+    /* Add the link to the individual listing created above. 
+    var link = listing.appendChild(document.createElement('a'));
+    link.href = '#';
+    link.className = 'title';
+    link.id = "link-" + prop.site_no;
+    link.innerHTML = prop.station_nm;
+
+    /* Add details to the individual listing. 
+    var details = listing.appendChild(document.createElement('div'));
+    details.innerHTML = prop.site_no;
+    /*if (prop.phone) {
+      details.innerHTML += ' · ' + prop.phoneFormatted;
+    }
+    
+  });
+}
+*/
 
     var clickability = function(e) {
       var clickedLayer = this.name;
@@ -508,38 +547,20 @@ for (var i = 0; i < toggleableLayerIds.length; i++) {
         map.on('mouseleave', 'lakeicons', function() {
             map.getCanvas().style.cursor = '';
         });
-
+      /*
        map.on('click', 'utilities-viz', function(e) {
         new mapboxgl.Popup()
           .setLngLat(e.lngLat)
           .setHTML(e.features[0].properties.name)
           .addTo(map);
       });
+      */
 
       var popup = new mapboxgl.Popup({
         closeButton: false,
         closeOnClick: false
       });
- 
-      map.on('mouseenter', 'wellicons', function(e) {
-      // Change the cursor style as a UI indicator.
-      map.getCanvas().style.cursor = 'pointer';
-       
-      var coordinates = e.features[0].geometry.coordinates.slice();
-      var siteName = e.features[0].properties.station_nm;
-       
-      // Ensure that if the map is zoomed out such that multiple
-      // copies of the feature are visible, the popup appears
-      // over the copy being pointed to.
-      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-      }
 
-      popup
-          .setLngLat(coordinates)
-          .setHTML(siteName)
-          .addTo(map);
-      });
 
       map.on('mouseenter', 'streamicons', function(e) {
       // Change the cursor style as a UI indicator.
@@ -579,13 +600,14 @@ for (var i = 0; i < toggleableLayerIds.length; i++) {
       });
 
 
-
+      /*
             map.on('click', 'utilities-simpler-viz', function(e) {
         new mapboxgl.Popup()
           .setLngLat(e.lngLat)
           .setHTML(e.features[0].properties.name)
           .addTo(map);
       });
+      */
    
       // Change the cursor to a pointer when the mouse is over the states layer.
       map.on('mouseenter', 'utilities-simpler-viz', function() {
@@ -597,13 +619,14 @@ for (var i = 0; i < toggleableLayerIds.length; i++) {
         map.getCanvas().style.cursor = '';
       });
 
-
+      /*
             map.on('click', 'utilities-simplest-viz', function(e) {
         new mapboxgl.Popup()
           .setLngLat(e.lngLat)
           .setHTML(e.features[0].properties.name)
           .addTo(map);
       });
+      */
    
       // Change the cursor to a pointer when the mouse is over the states layer.
       map.on('mouseenter', 'utilities-simplest-viz', function() {
@@ -626,6 +649,10 @@ map.on('click', 'streamicons', function(e) {
             var siteName = e.features[0].properties.station_nm;
             document.body.style.cursor = "wait";
             maphide.style = "visibility: visible"
+            var popup = new mapboxgl.Popup({ className: "streampopup"})
+              .setLngLat(coordinates)
+              .setHTML(siteName)
+              .addTo(map);
 
         getJSON(`/nwis_surfacewater_avg/${siteNumber}/${selectstart}/${selectend}`, function(err, data) {
           var labels_list = ["date", "gage_height_min_avg", "gage_height_max_avg", "gage_mean_avg", "gage_height_min", "gage_height_max", "gage_mean"];
