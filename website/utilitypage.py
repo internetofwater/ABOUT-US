@@ -124,7 +124,7 @@ def send_surfacewater_avg(site_no):
 '''
 @app.route('/nwis_surfacewater_avg/<path:site_no>/<path:start_date>/<path:end_date>', methods=['GET'])
 def send_surfacewater_avg(site_no, start_date, end_date):
-    query = """SELECT a.year, a.month, a.day, a.datenew, b.gage_height_min_avg, b.gage_height_max_avg, b.gage_mean_avg,
+    query = """SELECT a.datenew, b.gage_height_min_avg, b.gage_height_max_avg, b.gage_mean_avg,
         a.gage_height_min, a.gage_height_max, a.gage_mean
         FROM nwis.surfacewater_daily_site_2 a
         RIGHT JOIN (SELECT AVG(gage_height_min) gage_height_min_avg, AVG(gage_height_max) gage_height_max_avg, AVG(gage_mean) gage_mean_avg, day, month
