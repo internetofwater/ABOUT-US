@@ -137,7 +137,6 @@ def send_surfacewater_avg(site_no, start_date, end_date):
         ORDER BY a.year, a.month, a.day ASC""".format(site_no= site_no, start_date= start_date, end_date= end_date)
     data= pd.read_sql_query(query, cnx)
     df1 = data.astype(object).replace(np.nan, 'None')
-    print(df1)
     return jsonify(**df1.to_dict('split'));
 
 @app.route('/node_modules/<path:path>')
