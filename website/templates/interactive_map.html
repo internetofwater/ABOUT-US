@@ -679,7 +679,7 @@ map.on('click', 'streamicons', function(e) {
           var new_data = new Array (Object.keys(data.day).length);
           for (var k = 0; k < Object.keys(data.day).length; k++) {
             new_data[k] = new Array(4);
-            var new_date = `${data.month[k]}/${data.day[k]}/${data.year[k]}`;
+            var new_date = `${data.month[k]}/${data.day[k]}/${selectyear}`;
             var dt = new Date(new_date);
             new_data[k][0] = dt;
             //new_data[k][1] = data.gage_height_min_avg[k];
