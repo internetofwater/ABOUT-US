@@ -128,7 +128,7 @@ def send_surfacewater_avg(site_no, start_date, end_date):
     query = """SELECT a.datenew, b.gage_height_min_avg, b.gage_height_max_avg, b.gage_mean_avg,
         a.gage_height_min, a.gage_height_max, a.gage_mean
         FROM nwis.surfacewater_daily_site_2 a
-        RIGHT JOIN (SELECT AVG(gage_height_min) gage_height_min_avg, AVG(gage_height_max) gage_height_max_avg, AVG(gage_mean) gage_mean_avg, day, month
+        RIGHT JOIN (SELECT MIN(gage_height_min) gage_height_min_avg, MAX(gage_height_max) gage_height_max_avg, AVG(gage_mean) gage_mean_avg, day, month
         FROM nwis.surfacewater_daily_site_2
         WHERE site_number = '{site_no}'
         GROUP BY month, day) b
