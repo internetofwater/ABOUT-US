@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+    <meta charset="utf-8" />
+
+    <title>Create interactive hover effects with Mapbox GL JS</title>
+
+    <meta
+
+      name="viewport"
+
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+
+    />
+
+    <meta name="robots" content="noindex, nofollow" />
+
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js"></script>
+
+    <link
+
+      href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css"
+
+      rel="stylesheet"
+
+    />
+
+    <style>
+
+      body {
+
+        margin: 0;
+
+        padding: 0;
+
+      }
+
+      #map {
+
+        position: absolute;
+
+        top: 0;
+
+        bottom: 0;
+
+        width: 100%;
+
+      }
+
+      .quakeInfo {
+
+        position: absolute;
+
+        font-family: sans-serif;
+
+        margin-top: 5px;
+
+        margin-left: 5px;
+
+        padding: 5px;
+
+        width: 30%;
+
+        border: 2px solid black;
+
+        font-size: 14px;
+
+        color: #222;
+
+        background-color: #fff;
+
+        border-radius: 3px;
+
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+
+    <div id="map"></div>
+
+    <div class="quakeInfo">
+
+      <div><strong>PWSID:</strong>&nbsp;<span id="mag"></span></div>
+
+      <div><strong>Name:</strong>&nbsp;<span id="loc"></span></div>
+
+    </div>
+
+
+
+    <script>
+
+      mapboxgl.accessToken = 'pk.eyJ1IjoiYnR3MTkiLCJhIjoiY2tiOGR6MzI1MDNjaTJ0c3hnZHBmODRneSJ9.QVj1xKQ--FUvtw6soygk9g';
+
+      var map = new mapboxgl.Map({
+
+        container: 'map', // Specify the container ID
+
+        style: 'mapbox://styles/mapbox/streets-v11', // Specify which map style to use
+
+        center: [{{lon}}, {{lat}}], // Specify the starting position [lng, lat]
+
+        zoom: 10 // Specify the starting zoom
+
+      });
+
+
+  
+
+      map.on('load', function() {
+
+
+        map.addSource('utilities-simplest', {
+
+
+
+          'type': 'vector',
+
+
+
+          'url': 'mapbox://btw19.2fhcidlx'
+
+
+
+        });
+
+
+        map.addLayer({
+
+          'id': 'utilities-simplest-viz',
+
+            'source-layer': 'EvenSimplerPolygonsNC-9cvs7f',
+
+            'type': 'fill',
+
+            'source': 'utilities-simplest',
+
+            'maxzoom': 6.99,
+                        'paint': {
+                    'fill-color': '#4EE91E',
+                    'fill-opacity': [
+                              'case',
+                              ['boolean', ['feature-state', 'hover'], false],
+                              0.5,
+                              0.2
+                          ]
+                        }
+
+      })
+
+        map.addLayer({
+
+          'id': 'utilities-simplest-border-viz',
+
+            'source-layer': 'EvenSimplerPolygonsNC-9cvs7f',
+
+            'type': 'line',
+
+            'source': 'utilities-simplest',
+
+            'maxzoom': 6.99,
+
+            'paint': {
+
+             'line-color': '#4EE91E',
+
+             'line-width':2
+            
+
+          }
+
+
+      });
+    });
+
+map.on('load', function() {
+map.loadImage(
+'https://upload.wikimedia.org/wikipedia/commons/a/aa/Home_icon_grey.png',
+function(error, image) {
+if (error) throw error;
+map.addImage('cat', image);
+map.addSource('point', {
+'type': 'geojson',
+'data': {
+'type': 'FeatureCollection',
+'features': [
+{
+'type': 'Feature',
+'geometry': {
+'type': 'Point',
+'coordinates': [{{lon}}, {{lat}}]
+}
+}
+]
+}
+});
+map.addLayer({
+'id': 'points',
+'type': 'symbol',
+'source': 'point',
+'layout': {
+'icon-image': 'cat',
+'icon-size': 0.25
+}
+});
+}
+);
+});
+
+
+      // Target the span elements used in the sidebar
+
+
+
+      var magDisplay = document.getElementById('mag');
+
+
+
+      var locDisplay = document.getElementById('loc');
+
+
+      map.on('load', function() {
+
+
+        map.addSource('utilities-simplest', {
+
+
+
+          'type': 'vector',
+
+
+
+          'url': 'mapbox://btw19.2fhcidlx'
+
+
+
+        });
+
+
+        map.addLayer({
+
+          'id': 'utilities-simplest-viz',
+
+            'source-layer': 'EvenSimplerPolygonsNC-9cvs7f',
+
+            'type': 'fill',
+
+            'source': 'utilities-simplest',
+
+            'maxzoom': 6.99,
+                        'paint': {
+                    'fill-color': '#4EE91E',
+                    'fill-opacity': [
+                              'case',
+                              ['boolean', ['feature-state', 'hover'], false],
+                              0.5,
+                              0.2
+                          ]
+                        }
+
+      })
+
+        map.addLayer({
+
+          'id': 'utilities-simplest-border-viz',
+
+            'source-layer': 'EvenSimplerPolygonsNC-9cvs7f',
+
+            'type': 'line',
+
+            'source': 'utilities-simplest',
+
+            'maxzoom': 6.99,
+
+            'paint': {
+
+             'line-color': '#4EE91E',
+
+             'line-width':2
+            
+
+          }
+
+
+      });
+       
+
+
+
+
+
+                map.addSource('utilities-simpler', {
+
+          'type': 'vector',
+
+          'url': 'mapbox://btw19.0j0f3yp6'
+
+        });
+
+        map.addLayer({
+
+          'id': 'utilities-simpler-viz',
+
+            'source-layer': 'SimplePolygonsNC-bz1aui',
+
+            'type': 'fill',
+
+            'source': 'utilities-simpler',
+
+            'minzoom': 7,
+            'maxzoom': 10,
+            'paint': {
+                    'fill-color': '#1E1EE9',
+                    'fill-opacity': [
+                              'case',
+                              ['boolean', ['feature-state', 'hover'], false],
+                              0.5,
+                              0.2
+                          ]
+                        }
+              
+         
+
+      })
+
+ map.addLayer({
+
+            'id': 'utilities-simpler-border-viz',
+
+            'source-layer': 'SimplePolygonsNC-bz1aui',
+
+            'type': 'line',
+
+            'source': 'utilities-simpler',
+
+            'layout': {},
+
+            'minzoom': 10,
+
+            'paint': {
+              'line-color':'#1E1EE9',
+             'line-width':2
+
+          }
+
+      }); 
+     
+
+
+
+
+
+
+
+        map.addSource('utilities', {
+
+          'type': 'vector',
+
+          'url': 'mapbox://btw19.9b4ihil6'
+
+        });
+
+        map.addLayer({
+
+            'id': 'utilities-viz',
+
+            'source-layer': 'utilities-9lcba8',
+
+            'type': 'fill',
+
+            'source': 'utilities',
+
+            'layout': {},
+
+            'minzoom': 10,
+
+            'paint': {
+                    'fill-color': '#627BC1',
+                    'fill-opacity': [
+                              'case',
+                              ['boolean', ['feature-state', 'hover'], false],
+                              0.5,
+                              0.2
+                          ]
+                        }
+
+      });
+
+
+          map.addLayer({
+
+            'id': 'utilities-border-viz',
+
+            'source-layer': 'utilities-9lcba8',
+
+            'type': 'line',
+
+            'source': 'utilities',
+
+            'layout': {},
+
+            'minzoom': 10,
+
+            'paint': {
+              'line-color':'#627BC1',
+             'line-width':2
+
+          }
+
+      });
+          });
+
+
+
+
+        var quakeID = null;
+
+
+
+        map.on('mousemove', 'utilities-viz', e => {
+
+         
+
+
+          // Set variables equal to the current feature's magnitude, location, and time
+
+
+          var quakeMagnitude = e.features[0].properties.PWSID; // changed 
+
+          var quakeLocation = e.features[0].properties.SystemName;
+
+
+
+          if (e.features.length > 0) {
+
+
+            // Display the magnitude, location, and time in the sidebar
+
+
+
+            magDisplay.textContent = quakeMagnitude;
+
+            locDisplay.textContent = quakeLocation;
+
+            quakeID = e.features[0].id;
+
+            // When the mouse moves over the earthquakes-viz layer, update the
+
+            // feature state for the feature under the mouse
+
+            if (quakeID) {
+
+            map.setFeatureState(
+            { source: 'utilities', sourceLayer: "utilities-9lcba8", id: quakeID },
+            { hover :true }
+            );
+            }
+            }
+            });
+
+
+
+        // When the mouse leaves the earthquakes-viz layer, update the
+
+        // feature state of the previously hovered feature
+      
+
+        map.on('mouseleave', 'utilities-viz', function() {
+
+          if (quakeID) {
+
+            map.setFeatureState(
+
+              {
+
+                source: 'utilities',
+
+                sourceLayer: "utilities-9lcba8",
+
+                id: quakeID
+
+              },
+
+              {
+
+                hover: false
+
+              }
+
+            );
+
+          }
+          
+
+        quakeID = null;
+
+
+        
+         
+
+          
+
+
+          // Remove the information from the previously hovered feature from the sidebar
+
+          magDisplay.textContent = '';
+
+          locDisplay.textContent = '';
+
+         
+
+        
+
+
+        });
+
+
+
+map.on('mousemove', 'utilities-simpler-viz', e => {
+
+         
+
+
+          // Set variables equal to the current feature's magnitude, location, and time
+
+
+          var quakeMagnitude = e.features[0].properties.PWSID; // changed 
+
+          var quakeLocation = e.features[0].properties.SystemName;
+
+
+
+          if (e.features.length > 0) {
+
+
+            // Display the magnitude, location, and time in the sidebar
+
+
+
+            magDisplay.textContent = quakeMagnitude;
+
+            locDisplay.textContent = quakeLocation;
+
+            quakeID = e.features[0].id;
+
+            // When the mouse moves over the earthquakes-viz layer, update the
+
+            // feature state for the feature under the mouse
+
+            if (quakeID) {
+
+            map.setFeatureState(
+            { source: 'utilities-simpler', sourceLayer: "SimplePolygonsNC-bz1aui", id: quakeID },
+            { hover :true }
+            );
+            }
+            }
+            });
+
+
+
+        // When the mouse leaves the earthquakes-viz layer, update the
+
+        // feature state of the previously hovered feature
+      
+
+        map.on('mouseleave', 'utilities-simpler-viz', function() {
+
+          if (quakeID) {
+
+            map.setFeatureState(
+
+              {
+
+                source: 'utilities-simpler',
+
+                sourceLayer: "SimplePolygonsNC-bz1aui",
+
+                id: quakeID
+
+              },
+
+              {
+
+                hover: false
+
+              }
+
+            );
+
+          }
+          
+
+        quakeID = null;
+
+
+        
+         
+
+          
+
+
+          // Remove the information from the previously hovered feature from the sidebar
+
+          magDisplay.textContent = '';
+
+          locDisplay.textContent = '';
+
+         
+
+        
+
+
+        });
+
+
+
+        map.on('mousemove', 'utilities-simplest-viz', e => {
+
+         
+
+
+          // Set variables equal to the current feature's magnitude, location, and time
+
+
+          var quakeMagnitude = e.features[0].properties.PWSID; // changed 
+
+          var quakeLocation = e.features[0].properties.SystemName;
+
+
+
+          if (e.features.length > 0) {
+
+
+            // Display the magnitude, location, and time in the sidebar
+
+
+
+            magDisplay.textContent = quakeMagnitude;
+
+            locDisplay.textContent = quakeLocation;
+
+            quakeID = e.features[0].id;
+
+            // When the mouse moves over the earthquakes-viz layer, update the
+
+            // feature state for the feature under the mouse
+
+            if (quakeID) {
+
+            map.setFeatureState(
+            { source: 'utilities-simplest', sourceLayer: "EvenSimplerPolygonsNC-9cvs7f", id: quakeID },
+            { hover :true }
+            );
+            }
+            }
+            });
+
+
+
+        // When the mouse leaves the earthquakes-viz layer, update the
+
+        // feature state of the previously hovered feature
+      
+
+        map.on('mouseleave', 'utilities-simplest-viz', function() {
+
+          if (quakeID) {
+
+            map.setFeatureState(
+
+              {
+
+                source: 'utilities-simplest',
+
+                sourceLayer: "EvenSimplerPolygonsNC-9cvs7f",
+
+                id: quakeID
+
+              },
+
+              {
+
+                hover: false
+
+              }
+
+            );
+
+          }
+          
+
+        quakeID = null;
+
+
+        
+
+          // Remove the information from the previously hovered feature from the sidebar
+
+          magDisplay.textContent = '';
+
+          locDisplay.textContent = '';
+
+         
+
+        
+
+
+        });
+
+
+      
+
+
+    </script>
+
+
+  </body>
+
+
+</html>
